@@ -6,7 +6,7 @@ import {Routes, Route} from "react-router-dom";
 
 
 
-function Dialogs({dialogsData, myMessagesData, answerData}) {
+function Dialogs({dialogsData, myMessagesData}) {
 
 
     const renderDialogs = dialogsData.map(function (elem) {
@@ -27,9 +27,9 @@ function Dialogs({dialogsData, myMessagesData, answerData}) {
                 path={path}
                 element={
                     <DialogMessage
-                        key={elem.id}
-                        message={elem.message}
-                        likesCount={elem.likesCount}
+                        id = {elem.id}
+                        myMessages={elem.myMessages}
+                        answers={elem.answers}
                     />
                 }
             />

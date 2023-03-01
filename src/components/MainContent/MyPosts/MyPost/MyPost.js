@@ -3,7 +3,7 @@ import classes from './MyPost.module.css'
 import Post from "./Post/Post";
 
 function MyPost({postData}) {
-    const [notes, setNotes] = useState(postData);
+    let [notes, setNotes] = useState(postData);
     let [value, setValue] = useState('');
 
     let renderPosts = notes.map((elem)=>{
@@ -20,7 +20,7 @@ function MyPost({postData}) {
     }
 
     function addItem(){
-        let newElem = {id: `"${notes.length}"`, text: `"${value}"`, likesCount: '0'};
+        let newElem = {id: `"${notes.length +1}"`, text: `"${value}"`, likesCount: '0'};
         setNotes([...notes, newElem]);
         if(notes.length>=4){
             const copy = Object.assign([], notes);

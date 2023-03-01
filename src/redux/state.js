@@ -19,22 +19,26 @@ const state = {
         ],
 
         myMessagesData : [
-            {id: 1, message: 'Hi, quisquam.',  likesCount: 1},
-            {id: 2, message: 'How are you', likesCount: 2},
-            {id: 3, message: 'No thanks', likesCount: 1},
-            {id: 4, message: 'Really?', likesCount: 2},
-            {id: 5, message: 'Got it', likesCount: 2},
-            {id: 6, message: 'Ok. Bye. Thank you', likesCount: 1}
+            {
+                id: 1,
+                myMessages : [
+                    {id: 1, message: 'Hi, quisquam.',  likesCount: 1},
+                    {id: 11, message: 'Hi, quisquam11.',  likesCount: 11},
+
+                ],
+                answers : [
+                    {id: 1, message: 'Hi, quisquam2.',  likesCount: 1},
+                    {id: 222, message: 'Hi, quisquam222.',  likesCount: 222},
+                ]
+            },
+
+            {id: 2, myMessages : [{id: 1, message: 'Hi, quisquam3.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam4.',  likesCount: 1}]},
+            {id: 3, myMessages : [{id: 1, message: 'Hi, quisquam5.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam6.',  likesCount: 1}]},
+            {id: 4, myMessages : [{id: 1, message: 'Hi, quisquam7.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam8.',  likesCount: 1}]},
+            {id: 5, myMessages : [{id: 1, message: 'Hi, quisquam9.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam10.',  likesCount: 1}]},
+            {id: 6, myMessages : [{id: 1, message: 'Hi, quisquam11.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam12.',  likesCount: 1}]}
         ],
 
-        answerData : [
-            {id: 1, message: 'Hi, quisquam123.',  likesCount: 1},
-            {id: 2, message: 'How are you123', likesCount: 2},
-            {id: 3, message: 'No thanks123', likesCount: 1},
-            {id: 4, message: 'Really?123', likesCount: 2},
-            {id: 5, message: 'Got it123', likesCount: 2},
-            {id: 6, message: 'Ok. Bye. Thank you123', likesCount: 1}
-        ],
 
     },
 

@@ -1,9 +1,10 @@
 
 .message{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding: 10px;
-    min-height: 100px;
+    min-height: 100%;
     color: white;
 
     margin-bottom: 5px;
@@ -18,13 +19,13 @@
 
 .writeMessage{
     display: flex;
-    flex: 0 1 auto;
+    flex: 0 1 50%;
 }
 
 .answer{
     display: flex;
     align-self: end;
-    flex: 0 1 auto;
+    flex: 0 1 50%;
 }
 
 .cloud{
@@ -40,7 +41,7 @@
     position: absolute;
     border: 10px solid transparent; border-right: 10px solid #2f7e7e; border-bottom: 10px solid #2f7e7e;
     left: -20px;
-    top: 58px;
+    top: 53px;
 }
 
 .cloud:after{
@@ -51,7 +52,7 @@
     border-radius:50%;
     background: aquamarine;
     left: -30px;
-    top: 48px;
+    top: 43px;
 }
 
 
@@ -95,7 +96,7 @@
 }
 
 .roundFirst{
-    align-self: end;
+    align-self: start;
     margin-right: 30px;
 }
 
