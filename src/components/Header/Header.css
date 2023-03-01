@@ -1,0 +1,125 @@
+
+.Header{
+    grid-area: Header;
+    background-color: #E44D3A;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+/*---------------logo*/
+
+.logo{
+    width: 168px;
+    height: 30px;
+    background-image: url("./logo.png");
+    background-repeat: no-repeat;
+
+}
+
+/*---------------search*/
+
+.search-bar form {
+    position: relative;
+}
+.search-bar form input {
+    width: 100%;
+    background-color: #fff;
+    height: 38px;
+    color: #b2b2b2;
+    font-size: 12px;
+    border: 0;
+    padding: 0 10px;
+}
+.search-bar form button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #efefef;
+    width: 38px;
+    height: 100%;
+    border: 0;
+}
+
+.search-bar form button i {
+    color: #e44d3a;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.la {
+    display: inline-block;
+    font: normal normal normal 16px/1 "LineAwesome";
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+
+}
+
+.la-search:before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 15px;
+    height: 15px;
+    background-image: url("./peco-pall.png");
+    background-size: cover;
+
+
+}
+.user-info{
+    display: flex;
+    align-items: center;
+}
+.user-picture{
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    background-image: url("./userSmall.png");
+}
+
+
+/*---------------menu button*/
+
+.menu-btn a{
+    display: flex;
+    align-items: center;
+}
+
+.fa.fa-bars{
+    display: inline-block;
+    width: 20px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+}
+.fa-bars:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 3px;
+    background-color: white;
+    top: -7px;
+
+
+}
+
+.fa-bars:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 3px;
+    background-color: white;
+    top: 7px;
+
+
+}
+
+
+
+/*---------------user acc*/

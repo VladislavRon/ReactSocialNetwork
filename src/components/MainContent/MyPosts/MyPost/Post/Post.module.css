@@ -1,0 +1,14 @@
+.post{
+    font-size: 26px;
+    color: grey;
+}
+
+
+.round{
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: gold;
+    margin-right: 15px;
+}

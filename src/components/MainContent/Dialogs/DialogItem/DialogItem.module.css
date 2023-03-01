@@ -1,0 +1,25 @@
+.dialog{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+
+    margin-bottom: 5px;
+    color: white;
+    text-decoration: none;
+    border: 1px solid dodgerblue;
+    border-radius: 30px;
+    box-shadow: 0 0 5px 0 #09f;
+}
+
+.userName{
+    color: white;
+    text-decoration: none;
+}
+
+
+.active{
+    color: gold;
+
+}
+

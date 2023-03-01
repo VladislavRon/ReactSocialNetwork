@@ -1,0 +1,34 @@
+.Nav{
+    grid-area: Nav;
+    display: flex;
+    justify-content: center;
+    background-color: #E44D3A;
+}
+
+
+
+.item a{
+    text-decoration: none;
+    color: white;
+    font-size: 28px;
+}
+
+
+
+.item{
+    text-decoration: none;
+    color: white;
+    font-size: 38px;
+}
+
+.active{
+    color: gold;
+}
+
+
+.friends{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

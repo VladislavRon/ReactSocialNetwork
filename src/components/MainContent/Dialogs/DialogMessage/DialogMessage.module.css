@@ -1,0 +1,106 @@
+
+.message{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    min-height: 100px;
+    color: white;
+
+    margin-bottom: 5px;
+    border: 1px solid dodgerblue;
+    border-radius: 30px;
+    box-shadow: 0 0 5px 0 #09f;
+
+}
+
+
+
+
+.writeMessage{
+    display: flex;
+    flex: 0 1 auto;
+}
+
+.answer{
+    display: flex;
+    align-self: end;
+    flex: 0 1 auto;
+}
+
+.cloud{
+    min-height: 73px;
+    background-color: #2f7e7e;
+    border-radius: 25px 25px 25px 0;
+    padding: 10px;
+    position:relative;
+}
+
+.cloud:before{
+    content: '';
+    position: absolute;
+    border: 10px solid transparent; border-right: 10px solid #2f7e7e; border-bottom: 10px solid #2f7e7e;
+    left: -20px;
+    top: 58px;
+}
+
+.cloud:after{
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius:50%;
+    background: aquamarine;
+    left: -30px;
+    top: 48px;
+}
+
+
+.cloudAfter{
+    min-height: 73px;
+    background-color: #2F8063FF;
+    border-radius: 25px 0 25px 25px;
+    padding: 10px;
+    position:relative;
+}
+
+.cloudAfter:before{
+    content: '';
+    position: absolute;
+    border: 10px solid transparent; border-left: 10px solid #2F8063FF; border-top: 10px solid #2F8063FF;
+    right: -20px;
+    top: 0;
+}
+
+.cloudAfter:after{
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius:50%;
+    background: aquamarine;
+    right: -30px;
+    top: 0;
+}
+
+.round{
+    padding-bottom: 2px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 35px;
+    min-height: 35px;
+    border-radius: 50%;
+    background-color:  #E44D3A;
+
+}
+
+.roundFirst{
+    align-self: end;
+    margin-right: 30px;
+}
+
+.roundSecond{
+
+    align-self: start;
+    margin-left: 30px;
+}
