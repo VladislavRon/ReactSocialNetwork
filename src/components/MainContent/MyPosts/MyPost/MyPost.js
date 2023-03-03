@@ -15,18 +15,16 @@ function MyPost({postData}) {
 
 
 
-    function handleChange(event){
-        setValue(event.target.value)
-    }
+
 
     function addItem(){
+        let div = document.querySelector('#div');
+        div.scrollTop = div.scrollHeight;
         let newElem = {id: `"${notes.length +1}"`, text: `"${value}"`, likesCount: '0'};
         setNotes([...notes, newElem]);
-        if(notes.length>=4){
-            const copy = Object.assign([], notes);
-            copy.splice(0, 1); // так правильно
-            setNotes(copy);
-        }
+
+
+
     }
 
 
@@ -35,7 +33,11 @@ function MyPost({postData}) {
     return <div className={classes.posts}>
         <h3>My posts</h3>
         <div className={classes.news}>
-            <textarea  cols="30" rows="8" value={value} onChange={handleChange}></textarea>
+            <textarea
+                cols="30"
+                rows="8"
+                value={value}
+                onChange={event => {setValue(event.target.value)}}></textarea>
         </div>
         <input
             onClick={addItem}
@@ -44,7 +46,7 @@ function MyPost({postData}) {
             value="Add post"
         />
         <br/><br/>
-        <div>
+        <div id="div" className={classes.postsBox}>
             {renderPosts}
         </div>
 

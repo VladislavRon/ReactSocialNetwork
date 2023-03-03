@@ -17,3 +17,8 @@
 
 }
 
+.postsBox{
+    max-height: 210px;
+    overflow:  auto;
+}
+
