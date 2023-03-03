@@ -1,3 +1,4 @@
+import {rereenderEntireTree} from "../render";
 
 const state = {
 
@@ -22,21 +23,21 @@ const state = {
             {
                 id: 1,
                 myMessages : [
-                    {id: 1, message: 'Hi, quisquam.',  likesCount: 1},
-                    {id: 11, message: 'Hi, quisquam11.',  likesCount: 11},
+                    {id: 11, message: 'Hi, Papa rimskii.',  likesCount: 1},
+                    {id: 12, message: 'How are U',  likesCount: 11},
 
                 ],
                 answers : [
-                    {id: 1, message: 'Hi, quisquam2.',  likesCount: 1},
-                    {id: 222, message: 'Hi, quisquam222.',  likesCount: 222},
+                    {id: 11, message: 'Hi, Vl.',  likesCount: 1},
+                    {id: 12, message: 'Norm.',  likesCount: 222},
                 ]
             },
 
-            {id: 2, myMessages : [{id: 1, message: 'Hi, quisquam3.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam4.',  likesCount: 1}]},
-            {id: 3, myMessages : [{id: 1, message: 'Hi, quisquam5.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam6.',  likesCount: 1}]},
-            {id: 4, myMessages : [{id: 1, message: 'Hi, quisquam7.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam8.',  likesCount: 1}]},
-            {id: 5, myMessages : [{id: 1, message: 'Hi, quisquam9.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam10.',  likesCount: 1}]},
-            {id: 6, myMessages : [{id: 1, message: 'Hi, quisquam11.',  likesCount: 1}],  answers : [{id: 1, message: 'Hi, quisquam12.',  likesCount: 1}]}
+            {id: 2, myMessages : [{id: 2, message: 'Hi, iiiiiiGARb.',  likesCount: 1}],  answers : [{id: 2, message: 'Hi, Vl.2',  likesCount: 1}]},
+            {id: 3, myMessages : [{id: 3, message: 'Hi, Berlusconi.',  likesCount: 1}],  answers : [{id: 3, message: 'Hi, Vl.3',  likesCount: 1}]},
+            {id: 4, myMessages : [{id: 4, message: 'Hi, Tramp.',  likesCount: 1}],  answers : [{id: 4, message: 'Hi, Vl.4',  likesCount: 1}]},
+            {id: 5, myMessages : [{id: 5, message: 'Hi, Zelensky.',  likesCount: 1}],  answers : [{id: 5, message: 'Hi, Vl.5',  likesCount: 1}]},
+            {id: 6, myMessages : [{id: 6, message: 'Hi, Baiden.',  likesCount: 1}],  answers : [{id: 6, message: 'Hi, Vl.6' ,  likesCount: 1}]}
         ],
 
 
@@ -50,6 +51,21 @@ const state = {
         ]
 
     }
+
+
+}
+
+export let addMyMessage = (id, postMessage) =>{
+    let newPost = {id: 'one', message: postMessage, likesCount: '0'};
+    for (let elem of state.dialogsPage.myMessagesData){
+        if(elem.id === id){
+             elem.myMessages.push(newPost);
+
+        }
+
+    }
+
+    rereenderEntireTree(state);
 
 
 }

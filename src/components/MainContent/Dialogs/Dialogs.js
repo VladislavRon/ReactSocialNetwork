@@ -6,11 +6,10 @@ import {Routes, Route} from "react-router-dom";
 
 
 
-function Dialogs({dialogsData, myMessagesData}) {
+function Dialogs({dialogsData, myMessagesData, addMyMessage }) {
 
 
     const renderDialogs = dialogsData.map(function (elem) {
-
         return (
                 <DialogItem key={elem.id} name={elem.name} id={elem.id} url={elem.url}/>
         );
@@ -30,6 +29,7 @@ function Dialogs({dialogsData, myMessagesData}) {
                         id = {elem.id}
                         myMessages={elem.myMessages}
                         answers={elem.answers}
+                        addMyMessage={addMyMessage}
                     />
                 }
             />
