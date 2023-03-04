@@ -1,4 +1,3 @@
-import {rereenderEntireTree} from "../render";
 
 const state = {
 
@@ -51,21 +50,6 @@ const state = {
         ]
 
     }
-
-
-}
-
-export let addMyMessage = (id, postMessage) =>{
-    let newPost = {id: 'one', message: postMessage, likesCount: '0'};
-    for (let elem of state.dialogsPage.myMessagesData){
-        if(elem.id === id){
-             elem.myMessages.push(newPost);
-
-        }
-
-    }
-
-    rereenderEntireTree(state);
 
 
 }

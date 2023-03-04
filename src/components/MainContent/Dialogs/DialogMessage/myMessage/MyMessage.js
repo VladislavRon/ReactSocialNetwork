@@ -3,10 +3,10 @@ import classes from "../DialogMessage.module.css";
 
 
 
-function MyMessage({ message, likesCount}){
+function MyMessage({id, message, likesCount}){
 
     return(
-        <div  className={classes.writeMessage}>
+        <div key={id} className={classes.writeMessage}>
             <div className={`${classes.round} ${classes.roundFirst}`}>me</div>
             <div className={classes.cloud}>
                 {message}

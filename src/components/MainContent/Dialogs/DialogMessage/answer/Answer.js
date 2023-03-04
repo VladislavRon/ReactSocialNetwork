@@ -6,7 +6,7 @@ function Answer({id, message, likesCount}) {
 
     return (
 
-        <div  className={classes.answer}>
+        <div key={id} className={classes.answer}>
             <div className={classes.cloudAfter}>
                 {message}
                 &nbsp;&nbsp;

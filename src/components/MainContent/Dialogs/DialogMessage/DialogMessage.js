@@ -4,60 +4,56 @@ import MyMessage from "./myMessage/MyMessage";
 import Answer from "./answer/Answer";
 
 
-function DialogMessage({id, myMessages, answers, addMyMessage}){
-    //let [value2, setValue2] = useState('');
-    // const [notes2, setNotes2] = useState(myMessages);
 
-    let newPostElement = React.createRef();
-    let addPost = () =>{
-        let text = newPostElement.current.value;
-        addMyMessage(id,text);
+function DialogMessage({myMessages, answers}){
+    let [value2, setValue2] = useState('');
+    const [notesMyMessages, setNotesMyMessages] = useState(myMessages);
+    const [notesMyAnswers, setNotesMyAnswers] = useState(answers);
+
+
+    const renderMyMessage = notesMyMessages.map((elem) => {
+        return <MyMessage
+            id={elem.id}
+            message={elem.message}
+            likesCount={elem.likesCount}
+        />
+    });
+
+    const renderAnswer = notesMyAnswers.map((elem) => {
+        return <Answer
+            id={elem.id}
+            message={elem.message}
+            likesCount={elem.likesCount}
+        />
+    });
+
+
+    function addSms(){
+        let newElem = {id: `"${notesMyMessages.length +1}"`, message: `"${value2}"`, likesCount: '0'};
+        setNotesMyMessages([...notesMyMessages, newElem]);
 
     }
-
-
-    let renderMyMessage = myMessages.map(function(elem){
-        return <MyMessage
-
-            message={elem.message}
-            likesCount={elem.likesCount}
-        />
-    });
-
-    let renderAnswer = answers.map((elem) => {
-        return <Answer
-            message={elem.message}
-            likesCount={elem.likesCount}
-        />
-    });
-
-
-    // function addSms(){
-    //     let newElem = {id: `"${notes2.length +1}"`, message: `"${value2}"`, likesCount: '0'};
-    //     setNotes2([...notes2, newElem]);
-    // }
 
     return(
         <>
             <div className={classes.message}>
                 {renderMyMessage}
                 {renderAnswer}
-                <div className={classes.textArea}>
-                <textarea
 
-                    ref={newPostElement}
-                    cols="60"
-                    rows="2"
-                    placeholder={`dialog with ${id}`}
-                ></textarea>
-                    <input
-                        onClick={addPost}
-                        type="button"
-                        value="Send"
-                    />
-                </div>
             </div>
-
+            <div className={classes.textArea}>
+                <textarea
+                    value={value2}
+                    onChange={event => {setValue2(event.target.value)}}
+                    cols="30"
+                    rows="8"
+                ></textarea>
+                <input
+                    onClick={addSms}
+                    type="button"
+                    value="Send"
+                />
+            </div>
         </>
     );
 }
