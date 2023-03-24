@@ -1,41 +1,42 @@
 import React from 'react';
 import classes from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
-import DialogMessage from "./DialogMessage/DialogMessage";
 import {Routes, Route} from "react-router-dom";
+import {nanoid} from "nanoid";
+import DialogMessageContainer from "./DialogMessage/DialogMessageContainer";
 
 
 
-function Dialogs({dialogsData, myMessagesData}) {
+function Dialogs({store}) {
+     let state = store.getState().dialogsPage;
 
 
-    const renderDialogs = dialogsData.map(function (elem) {
+    const renderDialogs = state.dialogsData.map(function (elem) {
+        return  <DialogItem key={elem.id} name={elem.name} id={elem.id} url={elem.url}/> ;
+    });
 
-        return (
-                <DialogItem key={elem.id} name={elem.name} id={elem.id} url={elem.url}/>
-        );
-    })
-
-
-
-    const renderMessages = myMessagesData.map(function(elem){
+    const renderMessages = state.myMessagesData.map(function(elem){
         let path = "/" + elem.id;
 
         return (
             <Route
-                key={elem.id}
+                key={nanoid()}
                 path={path}
                 element={
-                    <DialogMessage
-                        id = {elem.id}
+                    <DialogMessageContainer
+                        id={elem.id}
                         myMessages={elem.myMessages}
                         answers={elem.answers}
+                        newMessageBody = {state.newMessageBody}
                     />
                 }
             />
+
         );
 
     })
+
+
 
 
     return (

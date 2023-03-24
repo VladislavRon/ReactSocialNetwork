@@ -4,9 +4,9 @@ import {NavLink} from "react-router-dom";
 import Friend from "./Friends/Friend";
 
 
-function Nav({friends}) {
+function Nav({store}) {
 
-    const renderFriends = friends.map(function(elem){
+    const renderFriends = store.getState().sidebar.friends.map(function(elem){
         return  <Friend key = {elem.id}
                     name ={elem.name}
                     url={elem.url}
@@ -14,7 +14,7 @@ function Nav({friends}) {
 
     })
 
-    const setActive = navData => navData.isActive ? `${classes.active} ${classes.item}`  : classes.item;
+    const setActive = navData => navData.isActive ? `${classes.active} ${classes.item}` : classes.item;
 
     return (
         <div className={classes.Nav}>

@@ -1,17 +1,14 @@
 import React from 'react';
-import classes from './Profile.module.css'
-import MyPost from "./MyPost/MyPost";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPostContainer from "./MyPost/MyPostContainer";
 
 
 
 
-function Profile({postData}) {
+const Profile = ({store}) => {
     return <div>
         <ProfileInfo />
-        <MyPost
-            postData = {postData}
-        />
+        <MyPostContainer store={store} />
     </div>;
 }
 

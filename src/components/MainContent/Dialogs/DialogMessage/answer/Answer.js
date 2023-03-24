@@ -1,12 +1,12 @@
 import React from 'react';
 import classes from "../DialogMessage.module.css";
+import { nanoid } from 'nanoid';
 
-
-function Answer({id, message, likesCount}) {
+function Answer({ message, likesCount}) {
 
     return (
 
-        <div key={id} className={classes.answer}>
+        <div  className={classes.answer}>
             <div className={classes.cloudAfter}>
                 {message}
                 &nbsp;&nbsp;
