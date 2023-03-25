@@ -12,6 +12,8 @@ function DialogMessage({ myMessages, answers, newMessageBody, sendMessageClick, 
     // const [notesMyAnswers, setNotesMyAnswers] = useState(answers);
 
 
+
+
     const renderMyMessage = myMessages.map((elem) => {
         return <MyMessage
             key={nanoid()}
