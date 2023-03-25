@@ -25,44 +25,52 @@ let initialState = {
 
 const dialogs_reducer = (state = initialState, action) => {
 
-    // stateCopy.myMessagesData= [...state.myMessagesData];
-    // stateCopy.myMessagesData[0] = {...state.myMessagesData[0]};
-    // stateCopy.myMessagesData[0].myMessages = [...state.myMessagesData[0].myMessages];
-    let stateCopy = { ...state };
+
+
+
     switch (action.type) {
         case SEND_MESSAGE:{
             let body = state.newMessageBody;
-            // let ID = action.id -1;
-            stateCopy.myMessagesData[0].myMessages.push({id: 26, message: body,  likesCount: 0})
-            stateCopy.newMessageBody = '';
+            let stateCopy = {
+                ...state,
+                newMessageBody: '',
+
+            };
+            let ID = 0//action.id -1;
+            // stateCopy.myMessagesData= [...state.myMessagesData];
+            // stateCopy.myMessagesData[0] = {...state.myMessagesData[0]};
+            stateCopy.myMessagesData[ID].myMessages.push({id: 26, message: body,  likesCount: 0})
             return stateCopy;
         }
         case UPDATE_NEW_MESSAGE_BODY:{
-            stateCopy.newMessageBody = action.body;
-            return stateCopy;
+             return{
+                ...state,
+                newMessageBody: action.body
+            };
+
         }
         default: return state;
     }
 
-    //  if (action.type === UPDATE_NEW_MESSAGE_BODY){
-    //     state.newMessageBody = action.body;
-    //
-    // } else if (action.type === SEND_MESSAGE){
-    //     let body = state.newMessageBody;
-    //     let ID = action.id -1;
-    //     state.newMessageBody = '';
-    //     state.myMessagesData[ID].myMessages.push({id: 26, message: body,  likesCount: 0})
-    //
-    // }
-    //
-    // return state;
+
 }
 export const sendMessageCreator = (id) =>  ({type: SEND_MESSAGE, id:id})
 export const updateNewMessageBodyCreator = (body) =>  ({  type: UPDATE_NEW_MESSAGE_BODY, body: body})
 
 export default dialogs_reducer;
 
-
+//  if (action.type === UPDATE_NEW_MESSAGE_BODY){
+//     state.newMessageBody = action.body;
+//
+// } else if (action.type === SEND_MESSAGE){
+//     let body = state.newMessageBody;
+//     let ID = action.id -1;
+//     state.newMessageBody = '';
+//     state.myMessagesData[ID].myMessages.push({id: 26, message: body,  likesCount: 0})
+//
+// }
+//
+// return state;
 
 
 
