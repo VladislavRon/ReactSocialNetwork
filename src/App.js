@@ -8,6 +8,9 @@ import Music from "./components/MainContent/Music/Music";
 import News from "./components/MainContent/News/News";
 import Settings from "./components/MainContent/Settings/Settings";
 import {Route, Routes} from "react-router-dom";
+import FriendsContainer from "./components/MainContent/Friends/FriendsContainer";
+
+
 
 
 
@@ -38,10 +41,13 @@ const App = ({store}) => {
                         element={<Dialogs  store={store}  />}
                     />
 
-
                     <Route path="/news" element={<News />}/>
                     <Route path="/music" element={<Music />}/>
                     <Route path="/settings" element={<Settings />}/>
+                    <Route
+                        path="/friends"
+                        element={<FriendsContainer  store={store}  />}
+                    />
                 </Routes>
             </div>
         </div>

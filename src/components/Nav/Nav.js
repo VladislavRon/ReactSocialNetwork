@@ -1,15 +1,17 @@
 import React from 'react';
 import classes from './Nav.module.css';
 import {NavLink} from "react-router-dom";
-import Friend from "./Friends/Friend";
+import {nanoid} from "nanoid";
+import FriendsOnline from "./FriendsOnline/FriendsOnline";
+
 
 
 function Nav({store}) {
 
     const renderFriends = store.getState().sidebar.friends.map(function(elem){
-        return  <Friend key = {elem.id}
-                    name ={elem.name}
-                    url={elem.url}
+        return  <FriendsOnline key = {nanoid()}
+                               name ={elem.name}
+                               url={elem.url}
         />
 
     })
@@ -34,13 +36,13 @@ function Nav({store}) {
                 <div>
                     <NavLink to="/settings" className={setActive}>Settings</NavLink>
                 </div>
-                <br/><br/>
+                <div>
+                     <NavLink to="/friends" className={setActive}>Friends</NavLink>
+                </div>
                 <div className={`${classes.item} ${classes.friends}`}>
-                    <div>Friends</div>
                     {renderFriends}
                 </div>
             </div>
-
         </div>
     );
 }

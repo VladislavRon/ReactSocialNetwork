@@ -1,10 +1,10 @@
 import React from 'react';
-import classes from './Friend.module.css'
+import classes from './FriendsOnline.module.css'
 
 
 
 
-function Friend({name, url}){
+function FriendsOnline({name, url}){
 
 
     return (
@@ -20,5 +20,4 @@ function Friend({name, url}){
     );
 }
 
-export default Friend;
-
+export default FriendsOnline;
