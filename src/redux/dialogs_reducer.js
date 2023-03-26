@@ -36,7 +36,7 @@ const dialogs_reducer = (state = initialState, action) => {
                 newMessageBody: '',
 
             };
-            let ID = 0//action.id -1;
+            let ID = action.id -1;
             // stateCopy.myMessagesData= [...state.myMessagesData];
             // stateCopy.myMessagesData[0] = {...state.myMessagesData[0]};
             stateCopy.myMessagesData[ID].myMessages.push({id: 26, message: body,  likesCount: 0})

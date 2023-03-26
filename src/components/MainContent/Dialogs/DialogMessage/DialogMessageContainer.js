@@ -3,13 +3,7 @@ import {connect} from "react-redux";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../../../redux/dialogs_reducer";
 import DialogMessage from "./DialogMessage";
 
-let ID;
 
-
-const DialogMessageContainer =({id})=> {
-    ID = id;
-
-}
 
 
 let mapStateToProps = (state) => {
@@ -25,7 +19,7 @@ let mapDispatchToProps = (dispatch) => {
             let action = updateNewMessageBodyCreator(body);
             dispatch(action);
         },
-        sendMessageClick: ()=>{dispatch(sendMessageCreator(ID));}
+        sendMessageClick: (ID)=>{dispatch(sendMessageCreator(ID));}
     }
 };
 
