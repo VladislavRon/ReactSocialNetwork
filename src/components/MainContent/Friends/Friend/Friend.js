@@ -4,13 +4,13 @@ import classes from './Friend.module.css'
 
 
 
-function Friend({id,fullName,location,followed,status,avatar, follow, unfollow}){
+function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow}){
 
 
     return (
         <>
             <div>
-                <img src={avatar} alt="friendPhoto"/>
+                <img src={ photoUrl === null ? photoUrl = 'https://gambolthemes.net/workwise-new/images/resources/s3.png' : photoUrl } alt="friendPhoto"/>
             </div>
             <div>
                 {fullName}

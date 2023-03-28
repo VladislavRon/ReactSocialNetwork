@@ -1,5 +1,7 @@
 import React from 'react';
+import {Route, Routes} from "react-router-dom";
 import './App.css';
+
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Profile from "./components/MainContent/MyPosts/Profile";
@@ -7,7 +9,6 @@ import Dialogs from "./components/MainContent/Dialogs/Dialogs";
 import Music from "./components/MainContent/Music/Music";
 import News from "./components/MainContent/News/News";
 import Settings from "./components/MainContent/Settings/Settings";
-import {Route, Routes} from "react-router-dom";
 import FriendsContainer from "./components/MainContent/Friends/FriendsContainer";
 
 

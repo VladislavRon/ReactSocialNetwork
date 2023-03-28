@@ -9,7 +9,7 @@ let initialState = {
         // {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
         // {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},
         // {id: nanoid() ,fullName: 'Vladislav O', location: {country:'Ukraine', city:'Kiev'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s3.png'},
-        //
+
     ]
 }
 

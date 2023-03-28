@@ -8,13 +8,12 @@ import {followActionCreator, setFriendsActionCreator, unfollowActionCreator} fro
 const mapStateToProps = (state) => {
     return{
         friends: state.friendsPage.friends,
-
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        follow: (friendID) => {
+        follows: (friendID) => {
             dispatch(followActionCreator(friendID))
         },
         unfollow: (friendID) => {

@@ -2,41 +2,45 @@ import React from 'react';
 import Friend from "./Friend/Friend";
 import classes from "./Friends.module.css";
 import {nanoid} from "nanoid";
+import  axios from "axios";
+
+
+// {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', photoUrl: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
+// {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', photoUrl: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},
+// {id: nanoid() ,fullName: 'Vladislav O', location: {country:'Ukraine', city:'Kiev'}, followed: true,  status: 'online', photoUrl: 'https://gambolthemes.net/workwise-new/images/resources/s3.png'},
 
 
 
-
-function Friends({friends, follow, unfollow, setFriends}){
-
-    if(friends.length === 0){
-        setFriends([
-            {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
-            {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},
-            {id: nanoid() ,fullName: 'Vladislav O', location: {country:'Ukraine', city:'Kiev'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s3.png'},
-
-        ])
+function Friends({friends, follows, unfollow, setFriends}){
+    const getFriends = () =>{
+        if(friends.length === 0){
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    setFriends(response.data.items)
+                });
+        }
     }
 
 
-    const friendsRender = friends.map(friend =>{
-        return(
+
+    const friendsRender = friends.map(friend =>
             <Friend
-                key= {friend.id}
-                id= {friend.id}
-                fullName= {friend.fullName}
-                location= {friend.location}
-                followed= {friend.followed}
+                key={nanoid()}
+                id={friend.id}
+                fullName={friend.name}
+                location='friend.location'
+                followed={friend.followed}
                 status= {friend.status}
-                avatar= {friend.avatar}
-                follow={follow}
+                photoUrl={friend.photos.small}
+                follow={follows}
                 unfollow={unfollow}
-                setFriends={setFriends}
             />
-        )
-    })
+        );
+
 
     return (
         <>
+            <button onClick={getFriends}>GetFriends</button>
             <div>
                 {friendsRender}
             </div>
