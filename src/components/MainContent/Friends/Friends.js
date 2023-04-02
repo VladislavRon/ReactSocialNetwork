@@ -10,20 +10,18 @@ import  axios from "axios";
 // {id: nanoid() ,fullName: 'Vladislav O', location: {country:'Ukraine', city:'Kiev'}, followed: true,  status: 'online', photoUrl: 'https://gambolthemes.net/workwise-new/images/resources/s3.png'},
 
 
+class Friends extends React.Component{
 
-function Friends({friends, follows, unfollow, setFriends}){
-    const getFriends = () =>{
-        if(friends.length === 0){
-            axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                .then(response => {
-                    setFriends(response.data.items)
-                });
-        }
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setFriends(response.data.items)
+            });
     }
 
 
-
-    const friendsRender = friends.map(friend =>
+    render(){
+        const friendsRender =  this.props.friends.map(friend =>
             <Friend
                 key={nanoid()}
                 id={friend.id}
@@ -32,23 +30,61 @@ function Friends({friends, follows, unfollow, setFriends}){
                 followed={friend.followed}
                 status= {friend.status}
                 photoUrl={friend.photos.small}
-                follow={follows}
-                unfollow={unfollow}
+                follow={this.props.follows}
+                unfollow={this.props.unfollow}
             />
         );
 
-
-    return (
-        <>
-            <button onClick={getFriends}>GetFriends</button>
-            <div>
-                {friendsRender}
-            </div>
-            <button>Show more</button>
-        </>
-
-
-    );
+        return (
+            <>
+                <div>
+                    {friendsRender}
+                </div>
+                <button>Show more</button>
+            </>
+        );
+    }
 }
+
+
+// function Friends({friends, follows, unfollow, setFriends}){
+//     const getFriends = () =>{
+//         if(friends.length === 0){
+//             axios.get('https://social-network.samuraijs.com/api/1.0/users')
+//                 .then(response => {
+//                     setFriends(response.data.items)
+//                 });
+//         }
+//     }
+//
+//
+//
+//     const friendsRender = friends.map(friend =>
+//             <Friend
+//                 key={nanoid()}
+//                 id={friend.id}
+//                 fullName={friend.name}
+//                 location='friend.location'
+//                 followed={friend.followed}
+//                 status= {friend.status}
+//                 photoUrl={friend.photos.small}
+//                 follow={follows}
+//                 unfollow={unfollow}
+//             />
+//         );
+//
+//
+//     return (
+//         <>
+//             <button onClick={getFriends}>GetFriends</button>
+//             <div>
+//                 {friendsRender}
+//             </div>
+//             <button>Show more</button>
+//         </>
+//
+//
+//     );
+// }
 
 export default Friends;
