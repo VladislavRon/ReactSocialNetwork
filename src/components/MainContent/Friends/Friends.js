@@ -13,14 +13,31 @@ import  axios from "axios";
 class Friends extends React.Component{
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
-                this.props.setFriends(response.data.items)
+                this.props.setFriends(response.data.items);
+                this.props.setTotalUsersCount(Math.ceil(response.data.totalCount/150));
+            });
+    }
+
+    onPageChanged = ( pageNumber) => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setFriends(response.data.items);
+
             });
     }
 
 
+
     render(){
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages = [];
+        for(let i=1; i<= pagesCount; i++){
+            pages.push(i);
+        }
+
         const friendsRender =  this.props.friends.map(friend =>
             <Friend
                 key={nanoid()}
@@ -37,6 +54,15 @@ class Friends extends React.Component{
 
         return (
             <>
+                <div>
+                    {pages.map(page=>{
+                        return <span
+                            key={nanoid()}
+                            onClick={(e)=>{ this.onPageChanged(page);} }
+                            className={(this.props.currentPage === page) ? classes.selectedPage : classes.unselectedPage }
+                        > {page} </span>
+                    })}
+                </div>
                 <div>
                     {friendsRender}
                 </div>

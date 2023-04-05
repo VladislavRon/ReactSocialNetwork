@@ -1,11 +1,7 @@
 import React from 'react';
 import classes from './Friend.module.css'
 
-
-
-
 function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow}){
-
 
     return (
         <>
@@ -16,10 +12,7 @@ function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow
                 {fullName}
             </div>
             <div>
-                {location.country}
-            </div>
-            <div>
-                {location.city}
+                {location}
             </div>
             <div>
                 {status}

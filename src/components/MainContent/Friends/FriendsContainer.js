@@ -1,13 +1,21 @@
 import React from 'react';
 import Friends from "./Friends";
 import {connect} from "react-redux";
-import {followActionCreator, setFriendsActionCreator, unfollowActionCreator} from "../../../redux/friends_reducer";
+import {
+    followActionCreator,
+    setCurrentPageActionCreator,
+    setFriendsActionCreator, setUsersTotalCountActionCreator,
+    unfollowActionCreator
+} from "../../../redux/friends_reducer";
 
 
 
 const mapStateToProps = (state) => {
     return{
         friends: state.friendsPage.friends,
+        pageSize: state.friendsPage.pageSize,
+        totalUsersCount: state.friendsPage.totalUsersCount,
+        currentPage: state.friendsPage.currentPage
     }
 }
 
@@ -21,6 +29,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         setFriends: (friends) =>{
             dispatch(setFriendsActionCreator(friends))
+        },
+        setCurrentPage:(pageNumber)=>{
+            dispatch(setCurrentPageActionCreator(pageNumber))
+        },
+        setTotalUsersCount: (totalCount) => {
+            dispatch(setUsersTotalCountActionCreator(totalCount))
         }
     }
 }

@@ -1,16 +1,20 @@
 import {nanoid} from "nanoid";
 
+// {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
+// {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},
+// {id: nanoid() ,fullName: 'Vladislav O', location: {country:'Ukraine', city:'Kiev'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s3.png'},
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_FRIENDS = 'SET_FRIENDS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 
 let initialState = {
-    friends : [
-        // {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
-        // {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},
-        // {id: nanoid() ,fullName: 'Vladislav O', location: {country:'Ukraine', city:'Kiev'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s3.png'},
-
-    ]
+    friends : [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 2
 }
 
 const friends_reducer = (state = initialState, action) => {
@@ -28,6 +32,7 @@ const friends_reducer = (state = initialState, action) => {
             };
 
         }
+
         case UNFOLLOW:{
             return  {
                 ...state,
@@ -40,9 +45,19 @@ const friends_reducer = (state = initialState, action) => {
                 })
             };
         }
+
         case SET_FRIENDS:{
-            return {...state, friends: [...state.friends ,...action.friends]}
+            return {...state, friends: action.friends}
         }
+
+        case SET_CURRENT_PAGE:{
+            return {...state, currentPage: action.currentPage}
+        }
+
+        case SET_TOTAL_COUNT:{
+            return {...state, totalUsersCount: action.count}
+        }
+
         default:
             return state;
     }
@@ -53,6 +68,8 @@ const friends_reducer = (state = initialState, action) => {
 export const followActionCreator = (friendID) =>({type: FOLLOW, friendID})
 export const unfollowActionCreator = (friendID) =>({type: UNFOLLOW, friendID})
 export const setFriendsActionCreator = (friends) =>({type: SET_FRIENDS, friends})
+export const setCurrentPageActionCreator = (currentPage) =>({type: SET_CURRENT_PAGE, currentPage: currentPage})
+export const setUsersTotalCountActionCreator = (totalUsersCount) => ({type: SET_TOTAL_COUNT, count: totalUsersCount})
 
 
 export default friends_reducer;
