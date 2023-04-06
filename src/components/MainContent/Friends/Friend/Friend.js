@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Friend.module.css'
+
 
 function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow}){
 

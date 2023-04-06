@@ -1,13 +1,49 @@
 import React from 'react';
-import Friends from "./Friends";
 import {connect} from "react-redux";
-import {
-    followActionCreator,
-    setCurrentPageActionCreator,
-    setFriendsActionCreator, setUsersTotalCountActionCreator,
-    unfollowActionCreator
-} from "../../../redux/friends_reducer";
+import { followActionCreator, setCurrentPageActionCreator, setFriendsActionCreator,
+    setUsersTotalCountActionCreator,  unfollowActionCreator}
+    from "../../../redux/friends_reducer";
+import axios from "axios";
+import Friends from "./Friends";
 
+
+
+class FriendsApiContainer extends React.Component{
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setFriends(response.data.items);
+                this.props.setTotalUsersCount(Math.ceil(response.data.totalCount/150));
+            });
+
+    }
+
+    onPageChanged = ( pageNumber) => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setFriends(response.data.items);
+
+            });
+    }
+
+
+    render(){
+        return (
+            <Friends
+                friends={this.props.friends}
+                totalUsersCount={this.props.totalUsersCount}
+                pageSize={this.props.pageSize}
+                currentPage={this.props.currentPage}
+                onPageChanged={this.onPageChanged}
+                follows={this.props.follows}
+                unfollow={this.props.unfollow}
+
+            />
+        );
+    }
+}
 
 
 const mapStateToProps = (state) => {
@@ -40,4 +76,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default  connect(mapStateToProps, mapDispatchToProps)(Friends);
+export default  connect(mapStateToProps, mapDispatchToProps)(FriendsApiContainer);

@@ -14,7 +14,7 @@ let initialState = {
     friends : [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 2
+    currentPage: 1
 }
 
 const friends_reducer = (state = initialState, action) => {
