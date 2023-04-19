@@ -7,7 +7,6 @@ import {
     from "../../../redux/friends_reducer";
 import axios from "axios";
 import Friends from "./Friends";
-import preloader from "./../../../loader.svg"
 import Preloader from "../../common/Preloader/Preloader";
 
 

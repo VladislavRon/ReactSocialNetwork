@@ -33,6 +33,10 @@ function DialogMessage({id, myMessages, answers, newMessageBody, sendMessageClic
 
     const onSendMessage = () => {
         sendMessageClick(id);
+        let chatMessages = document.querySelector('#myMessage');
+        setTimeout(()=>{
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 0.5)
 
     }
 
@@ -43,17 +47,21 @@ function DialogMessage({id, myMessages, answers, newMessageBody, sendMessageClic
 
     return(
         <>
-            <div className={classes.message}>
-                {renderMyMessage}
-                {renderAnswer}
+            <div id='dialogWindow' className={classes.message}>
+                <div id="myMessage" className={classes.myMessage}>
+                    {renderMyMessage}
+                </div>
+                <div id="Answer" className={classes.Answer}>
+                    {renderAnswer}
+                </div>
+
             </div>
             <div className={classes.textArea}>
                 <textarea
                     value={newMessageBody}
                     onChange={onNewMessageChange}
-
                     cols="30"
-                    rows="8"
+                    rows="2"
                 ></textarea>
                 <input
                     // onClick={addSms}

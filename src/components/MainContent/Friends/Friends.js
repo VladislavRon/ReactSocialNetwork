@@ -43,7 +43,6 @@ const Friends = (props) => {
             <div>
                 {friendsRender}
             </div>
-            <button>Show more</button>
         </>
     );
 

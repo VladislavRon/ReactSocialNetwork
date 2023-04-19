@@ -16,21 +16,22 @@ const MyPost = ({postData, newPostText, updateNewPostText, addPost}) => {
 
     let onAddPost = () => {
         addPost();
+        let chatMessages = document.querySelector('#div');
+        setTimeout(()=>{
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 0.5)
 
     }
 
     let onPostChange = () => {
-        debugger;
         let text = newPostElement.current.value;
         updateNewPostText(text);
-
     }
 
 
     return <div className={classes.posts}>
         <h3>My posts</h3>
         <div className={classes.news}>
-
             <textarea
                 onChange={onPostChange}
                 ref={newPostElement}
