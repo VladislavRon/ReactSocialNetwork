@@ -7,11 +7,25 @@
             0 / cover;
     margin: 0 0 15px 15px;
 }
-
+.user{
+    margin: 0 0 15px 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.user_photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user_desc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .userPhoto{
-    height: 70px;
-    float: left;
-    margin: 0 0  0 15px ;
+
 }
 
 

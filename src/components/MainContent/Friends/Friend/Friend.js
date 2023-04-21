@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from "react-router-dom";
 
 
 function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow}){
@@ -6,7 +7,9 @@ function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow
     return (
         <>
             <div>
-                <img src={ photoUrl === null ? photoUrl = 'https://gambolthemes.net/workwise-new/images/resources/s3.png' : photoUrl } alt="friendPhoto"/>
+                <NavLink to={'./../profile/' + id}>
+                    <img src={ photoUrl === null ? photoUrl = 'https://gambolthemes.net/workwise-new/images/resources/s3.png' : photoUrl } alt="friendPhoto"/>
+                </NavLink>
             </div>
             <div>
                 {fullName}

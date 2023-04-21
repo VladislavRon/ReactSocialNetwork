@@ -4,12 +4,12 @@ import './App.css';
 
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
-import Profile from "./components/MainContent/MyPosts/Profile";
 import Dialogs from "./components/MainContent/Dialogs/Dialogs";
 import Music from "./components/MainContent/Music/Music";
 import News from "./components/MainContent/News/News";
 import Settings from "./components/MainContent/Settings/Settings";
 import FriendsContainer from "./components/MainContent/Friends/FriendsContainer";
+import ProfileContainer from "./components/MainContent/MyPosts/ProfileContainer";
 
 
 
@@ -32,8 +32,8 @@ const App = ({store}) => {
             <div className="MainContent">
                 <Routes>
                     <Route
-                        path="/profile"
-                        element={<Profile  store={store} />}
+                        path="/profile/*"
+                        element={<ProfileContainer  store={store} />}
                     />
 
 

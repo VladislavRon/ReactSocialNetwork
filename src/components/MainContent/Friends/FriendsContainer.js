@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followActionCreator, setCurrentPageActionCreator, setFriendsActionCreator,
-    setUsersTotalCountActionCreator, toggleIsFetchingAC, unfollowActionCreator
+    follows, setCurrentPage, setFriends,
+    setTotalUsersCount, toggleIsFetching, unfollow
 }
     from "../../../redux/friends_reducer";
 import axios from "axios";
@@ -33,7 +33,7 @@ class FriendsApiContainer extends React.Component{
             });
     }
 
-   // https://loading.io/mod/spinner/atom/index.svg
+
 
 
     render(){
@@ -67,28 +67,49 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follows: (friendID) => {
-            dispatch(followActionCreator(friendID))
-        },
-        unfollow: (friendID) => {
-            dispatch(unfollowActionCreator(friendID))
-        },
-        setFriends: (friends) =>{
-            dispatch(setFriendsActionCreator(friends))
-        },
-        setCurrentPage:(pageNumber)=>{
-            dispatch(setCurrentPageActionCreator(pageNumber))
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setUsersTotalCountActionCreator(totalCount))
-        },
-        toggleIsFetching: (isFetching) =>{
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}
+export default  connect(mapStateToProps, {
+    follows, unfollow, setFriends, setCurrentPage, setTotalUsersCount, toggleIsFetching
+})(FriendsApiContainer);
 
 
-export default  connect(mapStateToProps, mapDispatchToProps)(FriendsApiContainer);
+//если вы передаете в connect вторым аргументом не mapDispatchToProps, а объект с AC,
+// то connect оборачивает ваши AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента."
+
+//если экшнкриэйторы и то что мы передаем мы назовем одинаково, то код еще можно сократить до пздц
+
+
+// export default  connect(mapStateToProps, {
+//     follows: followActionCreator,
+//     unfollow: unfollowActionCreator,
+//     setFriends: setFriendsActionCreator,
+//     setCurrentPage: setCurrentPageActionCreator,
+//     setTotalUsersCount: setUsersTotalCountActionCreator,
+//     toggleIsFetching: toggleIsFetchingAC
+// })(FriendsApiContainer);
+
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         follows: (friendID) => {
+//             dispatch(followActionCreator(friendID))
+//         },
+//         unfollow: (friendID) => {
+//             dispatch(unfollowActionCreator(friendID))
+//         },
+//         setFriends: (friends) =>{
+//             dispatch(setFriendsActionCreator(friends))
+//         },
+//         setCurrentPage:(pageNumber)=>{
+//             dispatch(setCurrentPageActionCreator(pageNumber))
+//         },
+//         setTotalUsersCount: (totalCount) => {
+//             dispatch(setUsersTotalCountActionCreator(totalCount))
+//         },
+//         toggleIsFetching: (isFetching) =>{
+//             dispatch(toggleIsFetchingAC(isFetching))
+//         }
+//     }
+// }
+//
+//
+// export default  connect(mapStateToProps, mapDispatchToProps)(FriendsApiContainer);

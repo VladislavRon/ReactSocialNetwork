@@ -70,12 +70,19 @@ const friends_reducer = (state = initialState, action) => {
 
 }
 
-export const followActionCreator = (friendID) =>({type: FOLLOW, friendID})
-export const unfollowActionCreator = (friendID) =>({type: UNFOLLOW, friendID})
-export const setFriendsActionCreator = (friends) =>({type: SET_FRIENDS, friends})
-export const setCurrentPageActionCreator = (currentPage) =>({type: SET_CURRENT_PAGE, currentPage: currentPage})
-export const setUsersTotalCountActionCreator = (totalUsersCount) => ({type: SET_TOTAL_COUNT, count: totalUsersCount})
-export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
+export const follows = (friendID) =>({type: FOLLOW, friendID})
+export const unfollow = (friendID) =>({type: UNFOLLOW, friendID})
+export const setFriends = (friends) =>({type: SET_FRIENDS, friends})
+export const setCurrentPage = (currentPage) =>({type: SET_CURRENT_PAGE, currentPage: currentPage})
+export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_COUNT, count: totalUsersCount})
+export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
+
+// export const followActionCreator = (friendID) =>({type: FOLLOW, friendID})
+// export const unfollowActionCreator = (friendID) =>({type: UNFOLLOW, friendID})
+// export const setFriendsActionCreator = (friends) =>({type: SET_FRIENDS, friends})
+// export const setCurrentPageActionCreator = (currentPage) =>({type: SET_CURRENT_PAGE, currentPage: currentPage})
+// export const setUsersTotalCountActionCreator = (totalUsersCount) => ({type: SET_TOTAL_COUNT, count: totalUsersCount})
+// export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 
 
 export default friends_reducer;

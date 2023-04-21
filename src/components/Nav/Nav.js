@@ -22,7 +22,7 @@ function Nav({store}) {
         <div className={classes.Nav}>
             <div>
                 <div>
-                    <NavLink  to="/profile" className={setActive}>My posts</NavLink>
+                    <NavLink  to="/profile" className={setActive}>Profile</NavLink>
                 </div >
                 <div>
                     <NavLink to="/dialogs" className={setActive}>Dialogs</NavLink>
