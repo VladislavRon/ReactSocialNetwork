@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import './App.css';
-
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Dialogs from "./components/MainContent/Dialogs/Dialogs";
@@ -10,6 +9,7 @@ import News from "./components/MainContent/News/News";
 import Settings from "./components/MainContent/Settings/Settings";
 import FriendsContainer from "./components/MainContent/Friends/FriendsContainer";
 import ProfileContainer from "./components/MainContent/MyPosts/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 
@@ -26,7 +26,7 @@ const App = ({store}) => {
 
     return (
         <div className='appWrapper'>
-            <Header />
+            <HeaderContainer />
             <Nav store={store} />
 
             <div className="MainContent">

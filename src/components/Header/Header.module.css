@@ -1,4 +1,6 @@
-
+.log_in a{
+    color: white;
+}
 .Header{
     grid-area: Header;
     background-color: #E44D3A;
@@ -20,10 +22,10 @@
 
 /*---------------search*/
 
-.search-bar form {
+.search_bar form {
     position: relative;
 }
-.search-bar form input {
+.search_bar form input {
     width: 100%;
     background-color: #fff;
     height: 38px;
@@ -32,7 +34,7 @@
     border: 0;
     padding: 0 10px;
 }
-.search-bar form button {
+.search_bar form button {
     position: absolute;
     top: 0;
     right: 0;
@@ -42,7 +44,7 @@
     border: 0;
 }
 
-.search-bar form button i {
+.search_bar form button i {
     color: #e44d3a;
     font-size: 20px;
     font-weight: bold;
@@ -58,7 +60,7 @@
 
 }
 
-.la-search:before {
+.la_search:before {
     content: "";
     position: absolute;
     top: 12px;
@@ -70,11 +72,12 @@
 
 
 }
-.user-info{
+
+.user_info{
     display: flex;
     align-items: center;
 }
-.user-picture{
+.user_picture{
     margin-right: 10px;
     width: 30px;
     height: 30px;
@@ -82,44 +85,3 @@
 }
 
 
-/*---------------menu button*/
-
-.menu-btn a{
-    display: flex;
-    align-items: center;
-}
-
-.fa.fa-bars{
-    display: inline-block;
-    width: 20px;
-    height: 3px;
-    background-color: white;
-    position: relative;
-}
-.fa-bars:before {
-    content: "";
-    position: absolute;
-    display: inline-block;
-    width: 20px;
-    height: 3px;
-    background-color: white;
-    top: -7px;
-
-
-}
-
-.fa-bars:after {
-    content: "";
-    position: absolute;
-    display: inline-block;
-    width: 20px;
-    height: 3px;
-    background-color: white;
-    top: 7px;
-
-
-}
-
-
-
-/*---------------user acc*/
