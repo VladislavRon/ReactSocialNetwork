@@ -18,7 +18,7 @@ let reducers = combineReducers({
 
 let store = createStore(reducers);
 
-window.store555 = store;
-// store555.getState()  стор в обьект window, что бы из консоли можно было легко его просмотреть
+window.store = store;
+// store.getState()  стор в обьект window, что бы из консоли можно было легко его просмотреть
 
 export default store;

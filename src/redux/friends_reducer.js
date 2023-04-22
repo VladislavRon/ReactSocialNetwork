@@ -16,7 +16,7 @@ let initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
 }
 
 const friends_reducer = (state = initialState, action) => {
@@ -27,7 +27,7 @@ const friends_reducer = (state = initialState, action) => {
                 //friends: [...state.friends]
                 friends: state.friends.map(friend => {
                     if (friend.id === action.friendID){
-                        return {...friend, followed: !friend.followed}
+                        return {...friend, followed: true}
                     }
                     return friend;
                 })
@@ -41,7 +41,7 @@ const friends_reducer = (state = initialState, action) => {
                 //friends: [...state.friends]
                 friends: state.friends.map(friend => {
                     if (friend.id === action.friendID){
-                        return {...friend, followed: !friend.followed}
+                        return {...friend, followed: false}
                     }
                     return friend;
                 })

@@ -27,6 +27,7 @@ class HeaderContainer extends React.Component {
     }
 }
 
+//чтобы функция вернула объект без return фигурные скобки оборачиваются обычными ???
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login
