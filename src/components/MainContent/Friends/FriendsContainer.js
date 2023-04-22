@@ -8,34 +8,58 @@ import {
 import axios from "axios";
 import Friends from "./Friends";
 import Preloader from "../../common/Preloader/Preloader";
+import {usersAPI} from "../../../api/api";
+
 
 
 class FriendsApiContainer extends React.Component{
 
-    componentDidMount() {
+    async componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
-                this.props.toggleIsFetching(false);
-                this.props.setFriends(response.data.items);
-                this.props.setTotalUsersCount(Math.ceil(response.data.totalCount/150));
-            });
+        let currentPage = this.props.currentPage;
+        let pageSize = this.props.pageSize;
+        let data = await usersAPI.getUsers(currentPage, pageSize);
+            this.props.toggleIsFetching(false);
+            this.props.setFriends(data.items);
+            this.props.setTotalUsersCount(Math.ceil(data.totalCount/150));
+
 
     }
 
     onPageChanged = ( pageNumber) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then(response => {
-                this.props.toggleIsFetching(false);
-                this.props.setFriends(response.data.items);
-            });
+        let pageSize = this.props.pageSize;
+        usersAPI.getUsers(pageNumber, pageSize).then(data => {
+            this.props.toggleIsFetching(false);
+            this.props.setFriends(data.items);
+        });
     }
+
+    // componentDidMount() {
+    //     this.props.toggleIsFetching(true);
+    //     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+    //         withCredentials: true
+    //     })
+    //         .then(response => {
+    //             this.props.toggleIsFetching(false);
+    //             this.props.setFriends(response.data.items);
+    //             this.props.setTotalUsersCount(Math.ceil(response.data.totalCount/150));
+    //         });
+    //
+    // }
+    //
+    // onPageChanged = ( pageNumber) => {
+    //     this.props.toggleIsFetching(true);
+    //     this.props.setCurrentPage(pageNumber);
+    //     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+    //         withCredentials: true
+    //     })
+    //         .then(response => {
+    //             this.props.toggleIsFetching(false);
+    //             this.props.setFriends(response.data.items);
+    //         });
+    // }
 
 
 
