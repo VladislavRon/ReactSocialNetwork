@@ -3,7 +3,9 @@ import {NavLink} from "react-router-dom";
 import axios from "axios";
 
 
-function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow}){
+
+
+function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow,toggleFollowingProgress,followingInProgress}){
 
     return (
         <>
@@ -25,8 +27,10 @@ function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow
                 {
 
                     followed
-                    ? <button onClick={()=>{
+                    ? <button disabled={followingInProgress.some(ID =>ID === id)} onClick={()=>{
+
                         //в delete-запросе withCredentials передается 2м как в get
+                        toggleFollowingProgress(true, id)
                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
                             withCredentials: true,
                             headers: {
@@ -35,15 +39,17 @@ function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow
                         })
                             .then(response => {
                                 if(response.data.resultCode === 0){
-                                    console.log('delete', response.data)
                                     unfollow(id)
                                 }
+                                toggleFollowingProgress(false, id)
                             });
                     }
 
                     }>unfollow</button>
                     :
-                    <button onClick={()=>{
+                    <button disabled={followingInProgress.some(ID =>ID === id)} onClick={()=>{
+                        //в post-запросе withCredentials передается 3м параметром
+                        toggleFollowingProgress(true, id)
                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
                             withCredentials: true,
                             headers: {
@@ -51,10 +57,10 @@ function Friend({id,fullName,location,followed,status,photoUrl, follow, unfollow
                             }
                         })
                             .then(response => {
-                                console.log('post', response.data)
                                 if(response.data.resultCode === 0){
                                     follow(id)
                                 }
+                                toggleFollowingProgress(false, id)
                             });
                     }
 

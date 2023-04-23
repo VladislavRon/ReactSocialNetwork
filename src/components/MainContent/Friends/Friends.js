@@ -4,6 +4,7 @@ import classes from "./Friends.module.css";
 import {nanoid} from "nanoid";
 
 
+
 const Friends = (props) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -13,6 +14,7 @@ const Friends = (props) => {
     }
 
     const friendsRender =  props.friends.map(friend =>
+
         <Friend
             key={nanoid()}
             id={friend.id}
@@ -23,6 +25,8 @@ const Friends = (props) => {
             photoUrl={friend.photos.small}
             follow={props.follows}
             unfollow={props.unfollow}
+            toggleFollowingProgress={props.toggleFollowingProgress}
+            followingInProgress={props.followingInProgress}
         />
     );
 
