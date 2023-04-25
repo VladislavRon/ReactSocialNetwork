@@ -30,7 +30,7 @@ class ProfileContainer extends React.Component{
     }
 
 }
-// wrapper to us react router's v6 hooks in class component (to use HOC pattern, like in router v5)
+// !!!!!!!!!!!!!!!!!!!!!!!!!wrapper to us react router's v6 hooks in class component (to use HOC pattern, like in router v5)!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function withRouter(Component) {
 

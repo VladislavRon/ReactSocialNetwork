@@ -1,4 +1,5 @@
 import {nanoid} from "nanoid";
+import {usersAPI} from "../api/api";
 
 // {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
 // {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},
@@ -78,13 +79,73 @@ const friends_reducer = (state = initialState, action) => {
 
 }
 
-export const follows = (friendID) =>({type: FOLLOW, friendID})
-export const unfollow = (friendID) =>({type: UNFOLLOW, friendID})
+export const followSuccess = (friendID) =>({type: FOLLOW, friendID})
+export const unfollowSuccess = (friendID) =>({type: UNFOLLOW, friendID})
 export const setFriends = (friends) =>({type: SET_FRIENDS, friends})
 export const setCurrentPage = (currentPage) =>({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_COUNT, count: totalUsersCount})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 export const toggleFollowingProgress = (isFetching, friendID) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, friendID})
+
+export const getUsersThunk = (currentPage, pageSize)=>{
+    return (dispatch)=>{
+        dispatch(toggleIsFetching(true));
+
+        usersAPI.getUsers(currentPage, pageSize).then(data =>{
+            dispatch(toggleIsFetching(false));
+            dispatch(setFriends(data.items));
+            dispatch(setTotalUsersCount(Math.ceil(data.totalCount/150)));
+        })
+    }
+}
+
+export const followThunk = (id)=>{
+    return (dispatch)=>{
+        dispatch(toggleFollowingProgress(true, id));
+
+        usersAPI.follow(id)
+            .then(response => {
+                if(response.data.resultCode === 0){
+                    dispatch(followSuccess(id));
+                }
+            dispatch(toggleFollowingProgress(false, id));
+        })
+    }
+}
+
+export const unfollowThunk = (id)=>{
+    return (dispatch)=>{
+        dispatch(toggleFollowingProgress(true, id));
+
+        usersAPI.unfollow(id)
+            .then(response => {
+                if(response.data.resultCode === 0){
+                    dispatch(unfollowSuccess(id));
+                }
+                dispatch(toggleFollowingProgress(false, id));
+        })
+    }
+}
+
+
+
+
+
+// export const getUsers = (currentPage, pageSize) => {  // Thunk Creator
+//
+//     return (dispatch) => {
+//
+//         dispatch(toggleIsFetching(true));
+//
+//         usersAPI.getUsers(currentPage, pageSize).then(data => {
+//             dispatch(setCurrentPage(currentPage)); //  <<<-----  вот чего не хватало в видео
+//             dispatch(toggleIsFetching(false));
+//             dispatch(setUsers(data.items));
+//             dispatch(setTotalUsersCount(data.totalCount));
+//         });
+//     }
+//
+// }
 
 // export const followActionCreator = (friendID) =>({type: FOLLOW, friendID})
 // export const unfollowActionCreator = (friendID) =>({type: UNFOLLOW, friendID})

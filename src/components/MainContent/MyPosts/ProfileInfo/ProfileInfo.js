@@ -21,8 +21,8 @@ function ProfileInfo(props){
                     <img className={classes.userPhoto} src={props.profile.photos.large} alt="userLogo"/>
                 </div>
                 <div className={classes.user_desc}>
-                    <div>{props.profile.fullName}</div>
-                    <div>{props.profile.aboutMe}</div>
+                    <div className={classes.user_desc_title}>{props.profile.fullName}</div>
+                    <div className={classes.user_desc_about}>{props.profile.aboutMe}</div>
                     <ul>{lis}</ul>
                 </div>
             </div>

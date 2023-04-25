@@ -12,20 +12,32 @@
     display: flex;
     justify-content: start;
     align-items: center;
+
 }
 .user_photo{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.userPhoto{
+    width: 230px;
+    height: 230px;
+}
+
 .user_desc{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-.userPhoto{
 
+}
+.user_desc_title{
+    font-weight: bold;
+    font-size: 20px;
+}
+.user_desc_about{
+    font-weight: bold;
+    font-size: 18px;
 }
 
 

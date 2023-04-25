@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    follows, setCurrentPage, setFriends,
-    setTotalUsersCount, toggleFollowingProgress, toggleIsFetching, unfollow
+    followSuccess, followThunk, getUsersThunk, setCurrentPage, setFriends,
+    setTotalUsersCount, toggleFollowingProgress, toggleIsFetching, unfollowSuccess, unfollowThunk
 }
     from "../../../redux/friends_reducer";
 import axios from "axios";
@@ -14,26 +14,27 @@ import {usersAPI} from "../../../api/api";
 
 class FriendsApiContainer extends React.Component{
 
-    async componentDidMount() {
-        this.props.toggleIsFetching(true);
-        let currentPage = this.props.currentPage;
-        let pageSize = this.props.pageSize;
-        let data = await usersAPI.getUsers(currentPage, pageSize);
-            this.props.toggleIsFetching(false);
-            this.props.setFriends(data.items);
-            this.props.setTotalUsersCount(Math.ceil(data.totalCount/150));
-
-
+    componentDidMount() {
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
+        // this.props.toggleIsFetching(true);
+        // let currentPage = this.props.currentPage;
+        // let pageSize = this.props.pageSize;
+        // usersAPI.getUsers(currentPage, pageSize).then(data =>{
+        //     this.props.toggleIsFetching(false);
+        //     this.props.setFriends(data.items);
+        //     this.props.setTotalUsersCount(Math.ceil(data.totalCount/150));
+        // })
     }
 
     onPageChanged = ( pageNumber) => {
-        this.props.toggleIsFetching(true);
+        // this.props.toggleIsFetching(true);
+        // this.props.setCurrentPage(pageNumber);
+        // usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+        //     this.props.toggleIsFetching(false);
+        //     this.props.setFriends(data.items);
+        // });
         this.props.setCurrentPage(pageNumber);
-        let pageSize = this.props.pageSize;
-        usersAPI.getUsers(pageNumber, pageSize).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setFriends(data.items);
-        });
+        this.props.getUsersThunk(pageNumber, this.props.pageSize);
     }
 
 
@@ -83,10 +84,17 @@ const mapStateToProps = (state) => {
 
 
 //FriendsContainer содержит только коннект, он передает все в новую компоненту FriendsApiContainer, она дальше в Friends
+
 export default  connect(mapStateToProps, {
-    follows, unfollow, setFriends, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress
+    followThunk, unfollowThunk, setCurrentPage,  toggleFollowingProgress, getUsersThunk
 })(FriendsApiContainer);
 
+//когда вынесли код в санку удаляем от сюда половину экспортов
+// export default  connect(mapStateToProps, {
+//     follows, unfollow, setFriends,
+//     setCurrentPage, setTotalUsersCount, toggleIsFetching,
+//     toggleFollowingProgress,  getUsersThunkCreator
+// })(FriendsApiContainer);
 
 //если вы передаете в connect вторым аргументом не mapDispatchToProps, а объект с AC,
 // то connect оборачивает ваши AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента."
