@@ -9,7 +9,8 @@ import DialogMessage from "./DialogMessage";
 let mapStateToProps = (state) => {
     return{
         newMessageBody: state.dialogsPage.newMessageBody,
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+
     }
 };
 

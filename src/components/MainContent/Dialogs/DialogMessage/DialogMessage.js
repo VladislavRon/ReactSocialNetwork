@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 
 
 
-function DialogMessage({id, myMessages, answers, newMessageBody, sendMessageClick, newMessageChange}){
+function DialogMessage({id, myMessages, answers, newMessageBody, sendMessageClick, newMessageChange, isAuth}){
     // let [value2, setValue2] = useState('');
     // const [notesMyMessages, setNotesMyMessages] = useState(myMessages);
     // const [notesMyAnswers, setNotesMyAnswers] = useState(answers);
@@ -44,6 +44,8 @@ function DialogMessage({id, myMessages, answers, newMessageBody, sendMessageClic
         let body = e.target.value;
         newMessageChange(body);
     }
+
+    // alert(isAuth)
 
     return(
         <>

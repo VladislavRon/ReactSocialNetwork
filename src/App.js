@@ -9,6 +9,7 @@ import Settings from "./components/MainContent/Settings/Settings";
 import FriendsContainer from "./components/MainContent/Friends/FriendsContainer";
 import ProfileContainer from "./components/MainContent/MyPosts/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 
@@ -34,7 +35,8 @@ const App = ({store}) => {
 
                     <Route
                         path="/dialogs/*"
-                        element={<Dialogs  store={store}  />}
+                        //store={store} попадает в каждую компоненту как стейты
+                        element={<Dialogs  store={store} />}
                     />
 
                     <Route path="/news" element={<News />}/>
@@ -43,6 +45,10 @@ const App = ({store}) => {
                     <Route
                         path="/friends"
                         element={<FriendsContainer  />}
+                    />
+                    <Route
+                        path="/login"
+                        element={ <Login />}
                     />
                 </Routes>
             </div>

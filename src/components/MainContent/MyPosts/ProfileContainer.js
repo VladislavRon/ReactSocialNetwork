@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {getProfileThunk, setFriendProfile} from "../../../redux/profile_reducer";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
 
 
 //https://social-network.samuraijs.com/api/1.0/profile/{userId}
@@ -26,6 +26,7 @@ class ProfileContainer extends React.Component{
     }
 
     render(){
+        if (!this.props.isAuth) {return <Navigate to={'/login'} />  }
         return <Profile {...this.props} profile = {this.props.profile} />
     }
 
@@ -51,7 +52,8 @@ function withRouter(Component) {
 }
 
 const mapStateToProps = (state) => ({
-  profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 
 export default connect( mapStateToProps, {getProfileThunk} )( withRouter( ProfileContainer ) );

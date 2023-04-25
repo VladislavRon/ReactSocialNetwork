@@ -33,7 +33,7 @@ const auth_reducer = (state = initialState, action) => {
 
 export const getAuthThunk = () => {
     return (dispatch) => {
-        authAPI.getAuth()
+        authAPI.me()
             .then(data => {
                 if(data.resultCode === 0){
                     let {id, email, login} = data.data;

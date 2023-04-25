@@ -1,7 +1,7 @@
 import {instance} from "./api";
 
 export const authAPI = {
-    getAuth() {
+    me() {
         return instance
             .get(`auth/me`)
             .then(response => response.data);
