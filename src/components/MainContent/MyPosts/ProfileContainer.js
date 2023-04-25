@@ -2,8 +2,9 @@ import React from 'react';
 import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {setFriendProfile} from "../../../redux/profile_reducer";
+import {getProfileThunk, setFriendProfile} from "../../../redux/profile_reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+
 
 //https://social-network.samuraijs.com/api/1.0/profile/{userId}
 
@@ -11,22 +12,21 @@ import {useLocation, useNavigate, useParams} from "react-router-dom";
 class ProfileContainer extends React.Component{
 
     componentDidMount() {
-        // let userId = 2;
         let userId = this.props.router.params['*'];
-        //console.log(this.props)
         if (!userId) {
             userId = 2;
         }
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                //console.log(response.data)
-                this.props.setFriendProfile(response.data);
-            });
+        this.props.getProfileThunk(userId);
+        // profileAPI
+        //     .getProfile(userId)
+        //     .then(data => {
+        //         //console.log(response.data)
+        //         this.props.setFriendProfile(data);
+        //     });
     }
 
     render(){
-        return <Profile {...this.props} profile = {this.props.profile}/>
+        return <Profile {...this.props} profile = {this.props.profile} />
     }
 
 }
@@ -54,6 +54,8 @@ const mapStateToProps = (state) => ({
   profile: state.profilePage.profile
 })
 
-export default connect( mapStateToProps, { setFriendProfile} )( withRouter( ProfileContainer ) );
+export default connect( mapStateToProps, {getProfileThunk} )( withRouter( ProfileContainer ) );
+
+// export default connect( mapStateToProps, { setFriendProfile, getProfileThunk} )( withRouter( ProfileContainer ) );
 
 // export default connect(mapStateToProps, {setFriendProfile})(ProfileContainer);

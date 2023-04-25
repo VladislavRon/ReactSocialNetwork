@@ -21,14 +21,15 @@ function Header(props) {
                 </form>
             </div>
             <div className={classes.log_in}>
-                {!props.isAuth ?
-                    <NavLink to={"/login"}>login</NavLink> :
+                {props.isAuth ?
                     <div className={classes.user_account} style={{display: 'inline-block'}}>
                         <div className={classes.user_info}>
                             <div className={classes.user_picture}></div>
                             <a href="#" title="">{props.login}</a>
                         </div>
                     </div>
+                     :
+                    <NavLink to={"/login"}>login</NavLink>
                 }
             </div>
 

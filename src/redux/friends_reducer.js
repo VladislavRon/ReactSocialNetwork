@@ -1,5 +1,5 @@
 import {nanoid} from "nanoid";
-import {usersAPI} from "../api/api";
+import {usersAPI} from "../api/friends_api";
 
 // {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
 // {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},

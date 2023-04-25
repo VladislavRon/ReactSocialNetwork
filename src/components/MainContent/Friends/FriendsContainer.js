@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 import Friends from "./Friends";
 import Preloader from "../../common/Preloader/Preloader";
-import {usersAPI} from "../../../api/api";
+import {usersAPI} from "../../../api/friends_api";
 
 
 

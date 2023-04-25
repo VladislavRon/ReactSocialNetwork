@@ -18,7 +18,7 @@ function ProfileInfo(props){
             <div className={classes.mainBanner}></div>
             <div className={classes.user}>
                 <div className={classes.user_photo}>
-                    <img className={classes.userPhoto} src={props.profile.photos.large} alt="userLogo"/>
+                    <img className={classes.userPhoto} src={props.profile.photos.large ? props.profile.photos.large : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="userLogo"/>
                 </div>
                 <div className={classes.user_desc}>
                     <div className={classes.user_desc_title}>{props.profile.fullName}</div>

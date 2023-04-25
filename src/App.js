@@ -21,13 +21,14 @@ const App = ({store}) => {
     return (
         <div className='appWrapper'>
             <HeaderContainer />
+
             <Nav store={store} />
 
             <div className="MainContent">
                 <Routes>
                     <Route
                         path="/profile/*"
-                        element={<ProfileContainer  store={store} />}
+                        element={<ProfileContainer />}
                     />
 
 
@@ -41,7 +42,7 @@ const App = ({store}) => {
                     <Route path="/settings" element={<Settings />}/>
                     <Route
                         path="/friends"
-                        element={<FriendsContainer  store={store}  />}
+                        element={<FriendsContainer  />}
                     />
                 </Routes>
             </div>

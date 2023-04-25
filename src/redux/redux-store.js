@@ -18,10 +18,13 @@ let reducers = combineReducers({
 });
 
 //let store = createStore(reducers);
+
+
 //добавляем мидлваре для обработки санок, ее надо инстал npm i redux-thunk
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
+//добавляем стор в обьект window, что бы из консоли можно было легко его просмотреть с пом запроса в консоли store.getState()
 window.store = store;
-// store.getState()  стор в обьект window, что бы из консоли можно было легко его просмотреть
+
 
 export default store;

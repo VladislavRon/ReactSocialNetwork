@@ -1,3 +1,5 @@
+import {profileAPI} from "../api/profile_api";
+
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_FRIEND_PROFILE = 'SET_FRIEND_PROFILE';
@@ -42,6 +44,17 @@ const profile_reducer = (state = initialState, action) => {
     }
 
 
+}
+
+
+export const getProfileThunk = (userId) => {
+    return (dispatch) => {
+        profileAPI
+            .getProfile(userId)
+            .then(data => {
+                dispatch(setFriendProfile(data));
+            });
+    }
 }
 
 export const setFriendProfile = (profile) =>  ({  type: SET_FRIEND_PROFILE, profile: profile })
