@@ -9,10 +9,11 @@ import axios from "axios";
 import Friends from "./Friends";
 import Preloader from "../../common/Preloader/Preloader";
 import {usersAPI} from "../../../api/friends_api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 
-class FriendsApiContainer extends React.Component{
+class FriendsContainer extends React.Component{
 
     componentDidMount() {
         this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
@@ -78,16 +79,19 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.friendsPage.totalUsersCount,
         currentPage: state.friendsPage.currentPage,
         isFetching: state.friendsPage.isFetching,
-        followingInProgress: state.friendsPage.followingInProgress
+        followingInProgress: state.friendsPage.followingInProgress,
+        isAuth: state.auth.isAuth
     }
 }
 
 
 //FriendsContainer содержит только коннект, он передает все в новую компоненту FriendsApiContainer, она дальше в Friends
 
+let AuthRedirectComponentFriends = withAuthRedirect( FriendsContainer);
+
 export default  connect(mapStateToProps, {
     followThunk, unfollowThunk, setCurrentPage,  toggleFollowingProgress, getUsersThunk
-})(FriendsApiContainer);
+})(AuthRedirectComponentFriends);
 
 //когда вынесли код в санку удаляем от сюда половину экспортов
 // export default  connect(mapStateToProps, {

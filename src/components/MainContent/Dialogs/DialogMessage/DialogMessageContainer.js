@@ -26,8 +26,8 @@ let mapDispatchToProps = (dispatch) => {
 
 
 
-const SuperDialogsContainer = connect(mapStateToProps,mapDispatchToProps)(DialogMessage);
-export default SuperDialogsContainer;
+const DialogMessageContainer = connect(mapStateToProps,mapDispatchToProps)(DialogMessage);
+export default DialogMessageContainer;
 
 // function DialogMessageContainer({id, myMessages, answers, newMessageBody, dispatch}){
 //

@@ -1,18 +1,18 @@
 import React from 'react';
 import classes from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
 import {nanoid} from "nanoid";
 import DialogMessageContainer from "./DialogMessage/DialogMessageContainer";
-import { Navigate } from "react-router-dom";
+
 
 function Dialogs({store}) {
 
     let state = store.getState().dialogsPage;
 
-    //redirect to login
-    let isAuth = store.getState().auth.isAuth;
-    if(!isAuth){ return <Navigate to={'/login'} /> }
+    //redirect to log in
+    // let isAuth = store.getState().auth.isAuth;
+    // if(!isAuth){ return <Navigate to={'/login'} /> }
 
 
     const renderDialogs = state.dialogsData.map(function (elem) {
@@ -33,7 +33,6 @@ function Dialogs({store}) {
                         myMessages={elem.myMessages}
                         answers={elem.answers}
                         newMessageBody={state.newMessageBody}
-                        isAuth={isAuth}
                     />
                 }
             />
@@ -58,6 +57,9 @@ function Dialogs({store}) {
         </div>
     );
 }
+
+
+
 
 export default Dialogs;
 

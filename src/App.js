@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import './App.css';
 import Nav from "./components/Nav/Nav";
-import Dialogs from "./components/MainContent/Dialogs/Dialogs";
 import Music from "./components/MainContent/Music/Music";
 import News from "./components/MainContent/News/News";
 import Settings from "./components/MainContent/Settings/Settings";
@@ -10,6 +9,8 @@ import FriendsContainer from "./components/MainContent/Friends/FriendsContainer"
 import ProfileContainer from "./components/MainContent/MyPosts/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import DialogsContainer from "./components/MainContent/Dialogs/DialogsContainer";
+
 
 
 
@@ -36,7 +37,7 @@ const App = ({store}) => {
                     <Route
                         path="/dialogs/*"
                         //store={store} попадает в каждую компоненту как стейты
-                        element={<Dialogs  store={store} />}
+                        element={<DialogsContainer store={store} />}
                     />
 
                     <Route path="/news" element={<News />}/>

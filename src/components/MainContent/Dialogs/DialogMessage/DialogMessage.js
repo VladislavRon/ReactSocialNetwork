@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 
 
 
-function DialogMessage({id, myMessages, answers, newMessageBody, sendMessageClick, newMessageChange, isAuth}){
+function DialogMessage({id, myMessages, answers, newMessageBody, sendMessageClick, newMessageChange}){
     // let [value2, setValue2] = useState('');
     // const [notesMyMessages, setNotesMyMessages] = useState(myMessages);
     // const [notesMyAnswers, setNotesMyAnswers] = useState(answers);
