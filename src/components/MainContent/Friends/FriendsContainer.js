@@ -10,6 +10,7 @@ import Friends from "./Friends";
 import Preloader from "../../common/Preloader/Preloader";
 import {usersAPI} from "../../../api/friends_api";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 
@@ -85,13 +86,26 @@ const mapStateToProps = (state) => {
 }
 
 
-//FriendsContainer содержит только коннект, он передает все в новую компоненту FriendsApiContainer, она дальше в Friends
 
-let AuthRedirectComponentFriends = withAuthRedirect( FriendsContainer);
 
-export default  connect(mapStateToProps, {
-    followThunk, unfollowThunk, setCurrentPage,  toggleFollowingProgress, getUsersThunk
-})(AuthRedirectComponentFriends);
+
+//with сompose 70 lesson
+//порядок походу не важен хз, хотя Димыч говорит снизу вверх...
+export default  compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        followThunk, unfollowThunk, setCurrentPage,  toggleFollowingProgress, getUsersThunk
+    })
+
+)(FriendsContainer)
+
+
+//без функции сompose 69 lesson
+// let AuthRedirectComponentFriends = withAuthRedirect( FriendsContainer);
+//
+// export default  connect(mapStateToProps, {
+//     followThunk, unfollowThunk, setCurrentPage,  toggleFollowingProgress, getUsersThunk
+// })(AuthRedirectComponentFriends);
 
 //когда вынесли код в санку удаляем от сюда половину экспортов
 // export default  connect(mapStateToProps, {
@@ -100,6 +114,8 @@ export default  connect(mapStateToProps, {
 //     toggleFollowingProgress,  getUsersThunkCreator
 // })(FriendsApiContainer);
 
+
+//FriendsContainer содержит только коннект, он передает все в новую компоненту FriendsApiContainer, она дальше в Friends
 //если вы передаете в connect вторым аргументом не mapDispatchToProps, а объект с AC,
 // то connect оборачивает ваши AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента."
 

@@ -23,23 +23,18 @@ const App = ({store}) => {
     return (
         <div className='appWrapper'>
             <HeaderContainer />
-
             <Nav store={store} />
-
             <div className="MainContent">
                 <Routes>
                     <Route
                         path="/profile/*"
                         element={<ProfileContainer />}
                     />
-
-
                     <Route
                         path="/dialogs/*"
-                        //store={store} попадает в каждую компоненту как стейты
+                        //store={store} попадает в компоненту как стейты
                         element={<DialogsContainer store={store} />}
                     />
-
                     <Route path="/news" element={<News />}/>
                     <Route path="/music" element={<Music />}/>
                     <Route path="/settings" element={<Settings />}/>

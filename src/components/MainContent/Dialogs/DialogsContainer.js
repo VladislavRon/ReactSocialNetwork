@@ -1,18 +1,10 @@
 import React from "react";
-import {connect} from "react-redux";
 import Dialogs from "./Dialogs";
-import {withAuthRedirect, withAuthRedirectForDialogs} from "../../hoc/withAuthRedirect";
+
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 
 
-
-const DialogsContainer = (props) => {
-
-    return <Dialogs store = {props.store}/>
-}
-
-
-
-
-export default DialogsContainer;
+export default compose(withAuthRedirect)(Dialogs);
