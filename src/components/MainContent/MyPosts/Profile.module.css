@@ -1,11 +1,11 @@
 
 .mainBanner{
-    height: 150px;
-    background:
-            url("https://kaifolog.ru/uploads/posts/2015-02/thumbs/1424426494_012.jpg")
-            no-repeat
-            0 / cover;
-    margin: 0 0 15px 15px;
+    /*height: 150px;*/
+    /*background:*/
+    /*        url("https://kaifolog.ru/uploads/posts/2015-02/thumbs/1424426494_012.jpg")*/
+    /*        no-repeat*/
+    /*        0 / cover;*/
+    /*margin: 0 0 15px 15px;*/
 }
 .user{
     margin: 0 0 15px 15px;

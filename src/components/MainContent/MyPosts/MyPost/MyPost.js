@@ -34,6 +34,7 @@ const MyPost = ({postData, newPostText, updateNewPostText, addPost}) => {
         <div className={classes.news}>
             <textarea
                 onChange={onPostChange}
+                //нативный js метод фокус - ref
                 ref={newPostElement}
                 value={newPostText}
             />

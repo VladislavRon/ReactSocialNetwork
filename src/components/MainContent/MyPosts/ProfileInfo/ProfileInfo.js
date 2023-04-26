@@ -2,6 +2,9 @@ import classes from "../Profile.module.css";
 import React from "react";
 import Preloader from "../../../common/Preloader/Preloader";
 import {nanoid} from "nanoid";
+import ProfileStatus from "./ProfileStatus";
+
+
 
 
 function ProfileInfo(props){
@@ -23,6 +26,7 @@ function ProfileInfo(props){
                 <div className={classes.user_desc}>
                     <div className={classes.user_desc_title}>{props.profile.fullName}</div>
                     <div className={classes.user_desc_about}>{props.profile.aboutMe}</div>
+                    <ProfileStatus status={"HeRRRRa4u 4to durnoi"}/>
                     <ul>{lis}</ul>
                 </div>
             </div>

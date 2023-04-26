@@ -39,13 +39,14 @@ const App = ({store}) => {
                     <Route path="/music" element={<Music />}/>
                     <Route path="/settings" element={<Settings />}/>
                     <Route
-                        path="/friends"
-                        element={<FriendsContainer  />}
-                    />
-                    <Route
                         path="/login"
                         element={ <Login />}
                     />
+                    <Route
+                        path="/friends"
+                        element={<FriendsContainer  />}
+                    />
+
                 </Routes>
             </div>
         </div>

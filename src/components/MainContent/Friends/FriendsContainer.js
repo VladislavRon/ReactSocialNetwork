@@ -114,7 +114,7 @@ export default  compose(
 //     toggleFollowingProgress,  getUsersThunkCreator
 // })(FriendsApiContainer);
 
-
+//Реакт видя классовую компоненту создает обьект!
 //FriendsContainer содержит только коннект, он передает все в новую компоненту FriendsApiContainer, она дальше в Friends
 //если вы передаете в connect вторым аргументом не mapDispatchToProps, а объект с AC,
 // то connect оборачивает ваши AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента."
