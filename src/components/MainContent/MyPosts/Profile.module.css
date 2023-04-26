@@ -7,6 +7,10 @@
     /*        0 / cover;*/
     /*margin: 0 0 15px 15px;*/
 }
+
+.status{
+    padding: 25px;
+}
 .user{
     margin: 0 0 15px 15px;
     display: flex;

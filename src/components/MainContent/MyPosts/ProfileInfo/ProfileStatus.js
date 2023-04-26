@@ -36,7 +36,8 @@ class ProfileStatus extends React.Component {
     }
     render() {
         return (
-            <div>
+            //делаем отмену редактирования при уходе с дива
+            <div className={classes.status} onMouseLeave={this.state.editMode ? this.deactivateEditMode : null}>
                 {!this.state.editMode ?
                     <div>
                         <span onClick={this.activateEditMode}>{this.state.value}</span>
