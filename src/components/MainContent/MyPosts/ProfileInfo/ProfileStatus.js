@@ -6,10 +6,11 @@ import React from "react";
 //Реакт видя классовую компоненту создает обьект! и именно с ним он работает
 //в обьекте есть жизненый цикл и поэтому есть локальный стейт урок 71
 class ProfileStatus extends React.Component {
+    //statusInputRef = React.createRef()
     state = {
         editMode: false,
-        status: this.props.status,
-        value: this.props.status
+        status: this.props.status
+
     }
     //обьявляем метод с помощью синт стрелочных функций для того, что бы не терять контекст в обработчике
     activateEditMode=()=>{
@@ -23,38 +24,46 @@ class ProfileStatus extends React.Component {
         //почитать что оно??
         // this.forceUpdate();
     }
-    deactivateEditMode=()=>{
-        this.setState({ editMode: false });
-        this.setState({value: this.state.status});
+    deActivateEditMode = () => {
+        this.setState({
+            editMode: false
+        });
+        {/*11. updateStatus()*/}
+        this.props.updateStatus(this.state.status)
+        //this.props.updateStatus(this.statusInputRef.current.value)
     }
-    handleChange=(event) =>{
-        this.setState({value: event.target.value});
+
+    onStatusChange = (e) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
     }
-    handleSave =() =>{
-        this.setState({value: this.state.value});
-        this.setState({ editMode: false });
-    }
+
     render() {
         return (
-            //делаем отмену редактирования при уходе с дива
-            <div className={classes.status} onMouseLeave={this.state.editMode ? this.deactivateEditMode : null}>
+            //делаем отмену редактирования при уходе с дива onMouseLeave={this.state.editMode ? this.deActivateEditMode : null}
+            <div className={classes.status}>
                 {!this.state.editMode ?
                     <div>
-                        <span onClick={this.activateEditMode}>{this.state.value}</span>
+                       <span
+                           onClick={this.activateEditMode}>
+                          {this.props.status || 'no status'}
+                       </span>
                     </div>
                     :
-                    <div >
+                    <div>
                         <textarea
-                            //онблур отключает клик кнопкой поскольку происходит быстрее......
-                            onChange={this.handleChange}
+                            // онблур отключает клик кнопкой поскольку происходит быстрее......
+                            //ref={this.statusInputRef}
+                            onChange={this.onStatusChange}
                             autoFocus={true}
-                            value={this.state.value}
+                            onBlur={this.deActivateEditMode}
+                            value={this.state.status}
                         />
-                        <button onClick={this.handleSave}>Save</button>
+
+                        {/*<button onClick={this.handleSave}>Save</button>*/}
                     </div>
-
                 }
-
             </div>
         )
     }

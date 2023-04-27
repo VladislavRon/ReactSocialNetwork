@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileThunk} from "../../../redux/profile_reducer";
+import {getProfileThunk, getStatus, updateStatus} from "../../../redux/profile_reducer";
 import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -15,10 +15,18 @@ class ProfileContainer extends React.Component{
     componentDidMount() {
         //console.log(this.props)
         let userId = this.props.router.params['*'];
+
         if (!userId) {
-            userId = 2;
+            userId = 28856;
         }
         this.props.getProfileThunk(userId);
+
+        //2.getUserStatus(userId) -> 3 down
+        //убираем рассинхронизирование локального и глобального стейта setTimeout-ом
+        //setTimeout(()=>{
+            this.props.getStatus(userId);
+        //}, 1000)
+
         // profileAPI
         //     .getProfile(userId)
         //     .then(data => {
@@ -31,7 +39,14 @@ class ProfileContainer extends React.Component{
         // if (this.props.isAuth === false) {
         //     return <Navigate to={'/login'} />
         // }
-        return <Profile {...this.props} profile = {this.props.profile} />
+
+        // 8.прокидываем status updateStatus в пропсы -> Profile
+        return <Profile
+            {...this.props}
+            profile = {this.props.profile}
+            status={this.props.status}
+            updateStatus={this.props.updateStatus}
+        />
     }
 
 }
@@ -56,13 +71,18 @@ function withRouter(Component) {
 }
 
 const mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+
+    //3.state.profilePage.status -> profile_reducer,
+
+    status: state.profilePage.status
 })
 
 //with compose 70lesson
 //порядок походу не важен хз, хотя Димыч говорит снизу вверх...
 export default compose(
-    connect( mapStateToProps, {getProfileThunk} ),
+    // 7.закидываем санки в connect {getStatus, updateStatus}
+    connect( mapStateToProps, {getProfileThunk, getStatus, updateStatus} ),
     withRouter,
     // withAuthRedirect
 )(ProfileContainer)
