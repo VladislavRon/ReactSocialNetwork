@@ -38,6 +38,14 @@ class ProfileStatus extends React.Component {
             status: e.currentTarget.value
         })
     }
+//для синхронизации локального стейта и стейта глобального делаем проверку в componentDidUpdate
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.status !== prevProps.status){
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
 
     render() {
         return (

@@ -22,10 +22,8 @@ class ProfileContainer extends React.Component{
         this.props.getProfileThunk(userId);
 
         //2.getUserStatus(userId) -> 3 down
-        //убираем рассинхронизирование локального и глобального стейта setTimeout-ом
-        //setTimeout(()=>{
             this.props.getStatus(userId);
-        //}, 1000)
+
 
         // profileAPI
         //     .getProfile(userId)
