@@ -46,7 +46,6 @@ const App = ({store}) => {
                         path="/friends"
                         element={<FriendsContainer  />}
                     />
-
                 </Routes>
             </div>
         </div>

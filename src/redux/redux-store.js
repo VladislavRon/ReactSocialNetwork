@@ -6,6 +6,7 @@ import friends_reducer from "./friends_reducer";
 import auth_reducer from "./auth_reducer";
 import  thunkMiddleware from "redux-thunk";
 
+
 // тут ключи типо profilePage - это как бы обьекты
 // в которых лежат значения - тоест наши стейты - что тоже объекты
 
