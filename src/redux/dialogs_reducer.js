@@ -1,3 +1,5 @@
+import {nanoid} from "nanoid";
+
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
@@ -20,7 +22,7 @@ let initialState = {
         {id: 5, myMessages : [{id: 5, message: 'Hi, Zelensky.',  likesCount: 1}],  answers : [{id: 5, message: 'Hi, Vl.5',  likesCount: 1}]},
         {id: 6, myMessages : [{id: 6, message: 'Hi, Baiden.',  likesCount: 1}],  answers : [{id: 6, message: 'Hi, Vl.6' ,  likesCount: 1}]}
     ],
-    newMessageBody: ''
+
 }
 
 const dialogs_reducer = (state = initialState, action) => {
@@ -30,31 +32,43 @@ const dialogs_reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SEND_MESSAGE:{
-            let body = state.newMessageBody;
+            let newMessage = action.newMessageBody;
             let stateCopy = {
-                ...state,
-                newMessageBody: '',
-
+                ...state
             };
             let ID = action.id -1;
             // stateCopy.myMessagesData= [...state.myMessagesData];
             // stateCopy.myMessagesData[0] = {...state.myMessagesData[0]};
-            stateCopy.myMessagesData[ID].myMessages.push({id: 26, message: body,  likesCount: 0})
+            stateCopy.myMessagesData[ID].myMessages.push({id: nanoid(), message: newMessage,  likesCount: 0})
             return stateCopy;
         }
-        case UPDATE_NEW_MESSAGE_BODY:{
-             return{
-                ...state,
-                newMessageBody: action.body
-            };
-
-        }
+        // case UPDATE_NEW_MESSAGE_BODY:{
+        //      return{
+        //         ...state,
+        //         newMessageBody: action.body
+        //     };
+        //
+        // }
+        // case SEND_MESSAGE:{
+        //     let body = state.newMessageBody;
+        //     let stateCopy = {
+        //         ...state,
+        //         newMessageBody: '',
+        //
+        //     };
+        //     let ID = action.id -1;
+        //     // stateCopy.myMessagesData= [...state.myMessagesData];
+        //     // stateCopy.myMessagesData[0] = {...state.myMessagesData[0]};
+        //     stateCopy.myMessagesData[ID].myMessages.push({id: 26, message: body,  likesCount: 0})
+        //     return stateCopy;
+        // }
         default: return state;
     }
 
 
 }
-export const sendMessageCreator = (id) =>  ({type: SEND_MESSAGE, id:id})
+export const sendMessageCreator = (id, newMessageBody) =>  ({type: SEND_MESSAGE, id:id,newMessageBody})
+//export const sendMessageCreator = (id) =>  ({type: SEND_MESSAGE, id:id})
 export const updateNewMessageBodyCreator = (body) =>  ({  type: UPDATE_NEW_MESSAGE_BODY, body: body})
 
 export default dialogs_reducer;

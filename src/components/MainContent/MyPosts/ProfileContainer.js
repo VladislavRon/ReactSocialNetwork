@@ -20,10 +20,11 @@ class ProfileContainer extends React.Component{
            // userId = 28856;
             userId = this.props.authorisedUserId;
         }
+
         this.props.getProfileThunk(userId);
 
         //2.getUserStatus(userId) -> 3 down
-            this.props.getUserProfile(userId);
+        this.props.getUserProfile(userId);
 
 
         // profileAPI

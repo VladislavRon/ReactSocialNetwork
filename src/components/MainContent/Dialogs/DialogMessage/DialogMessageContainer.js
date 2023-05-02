@@ -8,7 +8,7 @@ import DialogMessage from "./DialogMessage";
 
 let mapStateToProps = (state) => {
     return{
-        newMessageBody: state.dialogsPage.newMessageBody,
+        //newMessageBody: state.dialogsPage.newMessageBody,
         dialogsPage: state.dialogsPage,
 
     }
@@ -16,11 +16,14 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return{
-        newMessageChange: (body)=>{
-            let action = updateNewMessageBodyCreator(body);
-            dispatch(action);
-        },
-        sendMessageClick: (ID)=>{dispatch(sendMessageCreator(ID));}
+        // newMessageChange: (body)=>{
+        //     let action = updateNewMessageBodyCreator(body);
+        //     dispatch(action);
+        // },
+        // sendMessageClick: (ID)=>{dispatch(sendMessageCreator(ID));}
+        sendMessage: (ID, newMessageBody)=>{
+            dispatch(sendMessageCreator(ID, newMessageBody));
+        }
     }
 };
 

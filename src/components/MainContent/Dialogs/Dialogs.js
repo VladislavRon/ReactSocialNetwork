@@ -7,9 +7,11 @@ import DialogMessageContainer from "./DialogMessage/DialogMessageContainer";
 
 
 function Dialogs({store}) {
-
+    //без этого запроса не обойтись,
+    // без стора не добыть стейта именно в таком ветвлении компонентов, а не как у Димыча
     let state = store.getState().dialogsPage;
 
+    //тут проверял вошли мы в аккаут или нет,
     //redirect to log in
     // let isAuth = store.getState().auth.isAuth;
     // if(!isAuth){ return <Navigate to={'/login'} /> }
