@@ -85,3 +85,16 @@
 }
 
 
+
+/*---------------login*/
+.loginBlockNotAuth {
+    margin-left: 15px;
+    font-weight: bold;
+    color: #ef5050;
+}
+.loginBlockIsAuth {
+    /*float: left;*/
+    margin-left: 15px;
+    font-weight: bold;
+    color: #4f4fe5
+}

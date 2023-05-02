@@ -21,6 +21,7 @@ const auth_reducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
+                ...action.payload,
                 isAuth: true
             }
         }
@@ -31,19 +32,62 @@ const auth_reducer = (state = initialState, action) => {
 
 }
 
-export const getAuthThunk = () => {
+export const setAuthUserData = (id, email, login, isAuth) =>({
+    type: SET_USER_DATA,
+    //data:{id, email, login}
+    payload: {id, login, email, isAuth}
+})
+
+export const getAuthUserData = () => {
     return (dispatch) => {
         authAPI.me()
             .then(data => {
                 if(data.resultCode === 0){
                     let {id, email, login} = data.data;
-                    dispatch(setAuthUserData(id, email, login));
+                    //dispatch(setAuthUserData(id, email, login));
+                    dispatch( setAuthUserData( id, login, email, true ) );
                 }
             });
     }
 }
 
-export const setAuthUserData = (id, email, login) =>({type: SET_USER_DATA, data:{id, email, login}})
+export const login = (email, password, rememberMe, setStatus, setFieldValue, setSubmitting) => (dispatch) => {
+
+    authAPI.logIn( email, password, rememberMe )
+        .then( response => {
+
+            let resultCode = response.data.resultCode;
+
+            if (resultCode === 0) {
+                dispatch( getAuthUserData() );
+            } else {
+
+                let textError = `resultCode: ${resultCode} - ${response.data.messages.join()}`;
+
+                setStatus( textError );
+                //setFieldValue("general", textError)
+                setSubmitting( false );
+
+            }
+
+        } );
+
+}
+
+export const logout = () => (dispatch) => {
+
+    authAPI.logOut()
+        .then( response => {
+
+            if (response.data.resultCode === 0) {
+
+                dispatch( setAuthUserData( null, null, null, false ) );
+
+            }
+        } );
+
+}
+
 
 export default auth_reducer;
 

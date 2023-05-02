@@ -1,100 +1,148 @@
 import React from 'react';
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
+import {ErrorMessageWrapper, validateEmailField} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {login} from "../../redux/auth_reducer";
+import {Navigate} from "react-router-dom";
+import Style from '../../utils/validators/ErrorMessage.module.css';
+
+
 //формик избавляет нас от работы со стейт, с ошибками и состоянием разных полей
 //йап управляет валидацией, имеет кучу методов для валидации пароля имейла и тд
 
-const validateLoginForm = values => {
-    const errors = {};
-    if (!values.email) {
-        errors.email = 'Required 1';
-    } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test( values.email )
-    ) {
-        errors.email = 'Invalid email address';
+const LoginPage = (props) => {
+
+    const validationSchema = Yup.object().shape( {
+
+        password: Yup.string()
+            .min( 2, "Must be longer than 2 characters" )
+            .max( 15, "Must be shorter than 15 characters" )
+            .required( "Required 2" )
+    } );
+
+    if (props.isAuth) {
+        return <Navigate to={'/profile'} />
     }
-    return errors;
-};
-//т.к формик содержит обьект пользуемся методом для обьектов и в shape передать ее форму
-const validationSchemaLoginForm = Yup.object().shape( {
-    //тестируем name
-    //name: Yup.string.typeError('DolznoBitStrokoi').required('Oboviazkovo!!!')
-    //name: Yup.number.typeError('DolznoBit4islom').required('Oboviazkovo!!!')
-    //тестируем на пароль
-    password: Yup.string()
-        .min( 2, "Must be longer than 2 characters" )
-        .max( 5, "Must be shorter than 5 characters" )
-        .required( "Required 2" )
-} );
-
-
-const Login = () => {
 
     return (
         <div>
-            <h2> ... Login  </h2>
+            <h2> ... Login page </h2>
 
             <Formik
-                //начальные значения, если их не перечислить будет ругаться реакт
                 initialValues={{
-                    email: "",
-                    password: "",
-                    rememberMe: false
+                    email: '',
+                    password: '',
+                    rememberMe: false,
+                    general: ''
                 }}
-                //validateOnblur //когда будет валидироваться форма, например при переходе на др инпут
-                validate={validateLoginForm}
-                validationSchema={validationSchemaLoginForm}
-                //метод который будет вызывать функцию при отправке сообщение
-                onSubmit={(values) => {
-                    console.log( values )
+                validate={validateEmailField}
+                validationSchema={validationSchema}
+
+                onSubmit={(values, bagWithMethods) => {
+
+                    let {setStatus, setFieldValue, setSubmitting} = bagWithMethods;
+
+                    props.login(
+                        values.email,
+                        values.password,
+                        values.rememberMe,
+                        setStatus,
+                        setFieldValue,
+                        setSubmitting );
+
                 }}
             >
+                {props => {
 
-                {() => (
-                    <Form>
+                    let {status, values, isSubmitting} = props;
 
-                        <div>
-                            <Field
-                                name={'email'}
-                                type={'text'}
-                                placeholder={'e-mail'}
-                            />
-                        </div>
-                        <ErrorMessage name="email" component="div" />
+                    //console.log( status );
+                    //console.log( values.general );
+                    console.log( props.isSubmitting );
 
-                        <div>
-                            <Field
-                                name={'password'}
-                                type={'password'}
-                                placeholder={'password'}
-                            />
-                        </div>
-                        <ErrorMessage name="password" component="div" />
+                    return (
+                        <Form>
 
-                        <div>
-                            <Field
-                                type={'checkbox'}
-                                name={'rememberMe'}
-                                id='rememberMe'
-                            />
-                            <label htmlFor={'rememberMe'}> remember me </label>
-                        </div>
+                            <div>
 
-                        <button type={'submit'}>Login</button>
-                    </Form>
-                )}
+                                {values.general &&
+                                    <div>
+                                        _.{values.general} - with setFieldValue
+                                    </div>}
+
+                                {status &&
+                                    <div className={Style.validationErrorMessage}>
+                                        ..{status} - with setStatus
+                                    </div>}
+
+                                <div>
+                                    <Field
+                                        name={'email'}
+                                        type={'text'}
+                                        placeholder={'e-mail'} />
+                                </div>
+                                <ErrorMessage name="email">
+                                    {ErrorMessageWrapper}
+                                </ErrorMessage>
+
+                                <div>
+                                    <Field
+                                        name={'password'}
+                                        type={'password'}
+                                        placeholder={'password'} />
+                                </div>
+                                <ErrorMessage name="password">
+                                    {ErrorMessageWrapper}
+                                </ErrorMessage>
+
+                                <div>
+                                    <Field
+                                        type={'checkbox'}
+                                        name={'rememberMe'}
+                                        id='rememberMe' />
+                                    <label htmlFor={'rememberMe'}> remember me </label>
+                                </div>
+
+                                <button type={'submit'}
+                                        disabled={isSubmitting}
+                                >{isSubmitting ? "Please wait..." : "Submit"}</button>
+
+                            </div>
+
+
+                        </Form>
+                    )
+                }
+                }
             </Formik>
 
             <div>
                 ...
             </div>
 
+
         </div>
     )
 }
 
 
-export default Login;
+const mapStateToProps = (state) => (
+    {isAuth: state.auth.isAuth}
+);
+
+const LoginPageConnect = connect( mapStateToProps, {login} )( LoginPage );
+
+export default LoginPageConnect;
+
+
+
+// так пишем если ошибку вывести без красного шрифта
+// <ErrorMessage name="email" component="div" />
+// lel = {errors, touched, isValid, dirty, status} = props;
+
+
+
 //https://www.youtube.com/watch?v=K6f8GAhLGKA&ab_channel=%D0%91%D0%BE%D1%80%D0%B8%D1%81%D0%A7%D0%B5%D1%80%D0%B5%D0%BF%D0%B0%D0%BD%D0%BE%D0%B2
 // {/*formik это функция, сдесь у нас обьект, внутри значения, ошибки, тронут, была-ли-изменена
 //                  форма, хендел привязаный к параметру отправки формы, он будет вызывать ф onSubmit,
@@ -120,3 +168,7 @@ export default Login;
 //                             >Send</button>
 //                         </div>}}
 // */}
+//т.к формик содержит обьект пользуемся методом для обьектов и в shape передать ее форму
+//тестируем name
+//name: Yup.string.typeError('DolznoBitStrokoi').required('Oboviazkovo!!!')
+//name: Yup.number.typeError('DolznoBit4islom').required('Oboviazkovo!!!')

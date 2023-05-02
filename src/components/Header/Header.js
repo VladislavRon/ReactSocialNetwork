@@ -22,14 +22,14 @@ function Header(props) {
             </div>
             <div className={classes.log_in}>
                 {props.isAuth ?
-                    <div className={classes.user_account} style={{display: 'inline-block'}}>
+                    <div className={classes.loginBlockIsAuth} style={{display: 'inline-block'}}>
                         <div className={classes.user_info}>
                             <div className={classes.user_picture}></div>
                             <a href="#" title="">{props.login}</a>
                         </div>
                     </div>
                      :
-                    <NavLink to={"/login"}>login</NavLink>
+                    <NavLink className={classes.loginBlockNotAuth} to={"/login"}>login</NavLink>
                 }
             </div>
 

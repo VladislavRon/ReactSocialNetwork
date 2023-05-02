@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileThunk, getStatus, updateStatus} from "../../../redux/profile_reducer";
+import {getProfileThunk, getUserProfile, updateStatus} from "../../../redux/profile_reducer";
 import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -17,12 +17,13 @@ class ProfileContainer extends React.Component{
         let userId = this.props.router.params['*'];
 
         if (!userId) {
-            userId = 28856;
+           // userId = 28856;
+            userId = this.props.authorisedUserId;
         }
         this.props.getProfileThunk(userId);
 
         //2.getUserStatus(userId) -> 3 down
-            this.props.getStatus(userId);
+            this.props.getUserProfile(userId);
 
 
         // profileAPI
@@ -73,14 +74,16 @@ const mapStateToProps = (state) => ({
 
     //3.state.profilePage.status -> profile_reducer,
 
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorisedUserId: state.auth.id,
+    isAuth: state.auth.isAuth
 })
 
 //with compose 70lesson
 //порядок походу не важен хз, хотя Димыч говорит снизу вверх...
 export default compose(
     // 7.закидываем санки в connect {getStatus, updateStatus}
-    connect( mapStateToProps, {getProfileThunk, getStatus, updateStatus} ),
+    connect( mapStateToProps, {getProfileThunk, getUserProfile, updateStatus} ),
     withRouter,
     // withAuthRedirect
 )(ProfileContainer)
