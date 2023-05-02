@@ -4,14 +4,12 @@ import {NavLink} from "react-router-dom";
 
 
 
-
 function Header(props) {
     return (
         <div className={classes.Header}>
             <NavLink to={"/profile"}>
                 <div className={classes.logo}></div>
             </NavLink>
-
             <div className={classes.search_bar}>
                 <form>
                     <input type="text" name="search" placeholder="Search..." />
@@ -24,8 +22,9 @@ function Header(props) {
                 {props.isAuth ?
                     <div className={classes.loginBlockIsAuth} style={{display: 'inline-block'}}>
                         <div className={classes.user_info}>
-                            <div className={classes.user_picture}></div>
+                            {}<div className={classes.user_picture}></div>
                             <a href="#" title="">{props.login}</a>
+                            <button onClick={props.logout}>Log out</button>
                         </div>
                     </div>
                      :

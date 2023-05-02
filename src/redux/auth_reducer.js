@@ -14,15 +14,13 @@ let initialState = {
 }
 
 const auth_reducer = (state = initialState, action) => {
-
     switch (action.type) {
-
         case SET_USER_DATA:{
             return {
                 ...state,
-                ...action.data,
+                // ...action.data,
                 ...action.payload,
-                isAuth: true
+                // isAuth: true
             }
         }
 
@@ -52,37 +50,25 @@ export const getAuthUserData = () => {
 }
 
 export const login = (email, password, rememberMe, setStatus, setFieldValue, setSubmitting) => (dispatch) => {
-
     authAPI.logIn( email, password, rememberMe )
         .then( response => {
-
             let resultCode = response.data.resultCode;
-
             if (resultCode === 0) {
                 dispatch( getAuthUserData() );
             } else {
-
                 let textError = `resultCode: ${resultCode} - ${response.data.messages.join()}`;
-
                 setStatus( textError );
                 //setFieldValue("general", textError)
                 setSubmitting( false );
-
             }
-
         } );
-
 }
 
 export const logout = () => (dispatch) => {
-
     authAPI.logOut()
         .then( response => {
-
             if (response.data.resultCode === 0) {
-
                 dispatch( setAuthUserData( null, null, null, false ) );
-
             }
         } );
 

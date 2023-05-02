@@ -17,7 +17,7 @@ const LoginPage = (props) => {
 
         password: Yup.string()
             .min( 2, "Must be longer than 2 characters" )
-            .max( 15, "Must be shorter than 15 characters" )
+            .max( 5, "Must be shorter than 15 characters" )
             .required( "Required 2" )
     } );
 

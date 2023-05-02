@@ -19,10 +19,10 @@ export const validateEmailField = values => {
 export const ErrorMessageWrapper = (msg) => {
 
     return (
-        <div >
-         <span className={Style.validationErrorMessage}>
-            {msg}
-         </span>
+        <div>
+            <span className={Style.validationErrorMessage}>
+               {msg}
+            </span>
         </div>
     )
 }

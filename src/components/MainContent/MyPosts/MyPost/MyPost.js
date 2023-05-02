@@ -57,7 +57,7 @@ const AddNewPostForm = (props) => {
     const validationSchema = Yup.object().shape( {
         newPostText: Yup.string()
             .min( 1, "Must be longer than 1 characters !" )
-            .max( 15, "Must be shorter than 5 characters !" )
+            .max( 15, "Must be shorter than 15 characters !" )
             .required( "Required !" )
     } );
 
