@@ -1,5 +1,5 @@
-import {profileAPI} from "../api/profile_api";
-import {setFriendProfile} from "./profile_reducer";
+//import {profileAPI} from "../api/profile_api";
+// import {setFriendProfile} from "./profile_reducer";
 import {authAPI} from "../api/auth_api";
 
 const SET_USER_DATA = 'SET_USER_DATA';

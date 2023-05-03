@@ -2,8 +2,8 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileThunk, getUserProfile, updateStatus} from "../../../redux/profile_reducer";
-import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
+//import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
@@ -18,6 +18,14 @@ class ProfileContainer extends React.Component{
 
         if (!userId) {
            // userId = 28856;
+           //Lesson 79. При перезагрузке мы получим значение null и вместо профиля мы получим крутилку preloader
+           //но если мы перейдем на любую вкладку меню (друзья диалоги и тд) а потом обратно, то профиль появится
+           //пофиксить эту багу сложно - это отдельная, сложная тема, будет дальше
+           //как мы определяем что пользователь авторизован - getUsersData шлем get запрос me
+           //переходя по страницам мы легко определяем, но после перезагрузки страницы
+           // мы оказываемся на странице быстрее чем получаем ответ на этот запрос
+           //Так же есть непофиксеный баг, когда мы логинимся с диалогов или друзей,
+           // то попадаем в профиль, вместо того, что бы вернутся назад
             userId = this.props.authorisedUserId;
         }
 
@@ -72,9 +80,7 @@ function withRouter(Component) {
 
 const mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-
     //3.state.profilePage.status -> profile_reducer,
-
     status: state.profilePage.status,
     authorisedUserId: state.auth.id,
     isAuth: state.auth.isAuth
