@@ -32,22 +32,21 @@ const auth_reducer = (state = initialState, action) => {
 
 export const setAuthUserData = (id, email, login, isAuth) =>({
     type: SET_USER_DATA,
-    //data:{id, email, login}
     payload: {id, login, email, isAuth}
 })
 
-export const getAuthUserData = () => {
-    return (dispatch) => {
-        authAPI.me()
+export const getAuthUserData = () =>  (dispatch) => {
+    //не забыть поставить  ретерн !!!!!!!!!!!!!!
+    //dispatch умеет возвращать то, что мы ретурним из этой функции sank
+    return    authAPI.me()
             .then(data => {
                 if(data.resultCode === 0){
                     let {id, email, login} = data.data;
-                    //dispatch(setAuthUserData(id, email, login));
                     dispatch( setAuthUserData( id, login, email, true ) );
                 }
             });
     }
-}
+
 
 export const login = (email, password, rememberMe, setStatus, setFieldValue, setSubmitting) => (dispatch) => {
     authAPI.logIn( email, password, rememberMe )
@@ -58,7 +57,6 @@ export const login = (email, password, rememberMe, setStatus, setFieldValue, set
             } else {
                 let textError = `resultCode: ${resultCode} - ${response.data.messages.join()}`;
                 setStatus( textError );
-                //setFieldValue("general", textError)
                 setSubmitting( false );
             }
         } );

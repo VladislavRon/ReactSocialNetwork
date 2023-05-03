@@ -3,30 +3,33 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileThunk, getUserProfile, updateStatus} from "../../../redux/profile_reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-//import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-
+import {Navigate} from "react-router-dom";
 
 //https://social-network.samuraijs.com/api/1.0/profile/{userId}
 
 
 class ProfileContainer extends React.Component{
+    constructor(props) {
+        super( props );
+        this.state = {
+            isShowMyProfile: true
+        }
+    }
 
     componentDidMount() {
-        //console.log(this.props)
-        let userId = this.props.router.params['*'];
 
+        let userId = this.props.router.params['*'];
+        debugger;
+        // userId = 28856;
         if (!userId) {
-           // userId = 28856;
-           //Lesson 79. При перезагрузке мы получим значение null и вместо профиля мы получим крутилку preloader
-           //но если мы перейдем на любую вкладку меню (друзья диалоги и тд) а потом обратно, то профиль появится
-           //пофиксить эту багу сложно - это отдельная, сложная тема, будет дальше
-           //как мы определяем что пользователь авторизован - getUsersData шлем get запрос me
-           //переходя по страницам мы легко определяем, но после перезагрузки страницы
-           // мы оказываемся на странице быстрее чем получаем ответ на этот запрос
-           //Так же есть непофиксеный баг, когда мы логинимся с диалогов или друзей,
-           // то попадаем в профиль, вместо того, что бы вернутся назад
+
             userId = this.props.authorisedUserId;
+            // if(!userId){
+            //     //console.log(this.props.history)
+            //     //history netu v propsax
+            //     //this.props.history.push("/login")
+            // }
         }
 
         this.props.getProfileThunk(userId);

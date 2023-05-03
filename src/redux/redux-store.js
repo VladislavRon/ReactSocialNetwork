@@ -5,6 +5,7 @@ import sidebar_reducer from "./sidebar_reducer";
 import friends_reducer from "./friends_reducer";
 import auth_reducer from "./auth_reducer";
 import  thunkMiddleware from "redux-thunk";
+import app_reducer from "./app_reducer";
 
 
 // тут ключи типо profilePage - это как бы обьекты
@@ -15,7 +16,8 @@ let reducers = combineReducers({
     dialogsPage: dialogs_reducer,
     sidebar: sidebar_reducer,
     friendsPage: friends_reducer,
-    auth: auth_reducer
+    auth: auth_reducer,
+    app: app_reducer
 });
 
 //let store = createStore(reducers);

@@ -92,7 +92,7 @@ const mapStateToProps = (state) => {
 //with сompose 70 lesson
 //порядок походу не важен хз, хотя Димыч говорит снизу вверх...
 export default  compose(
-    withAuthRedirect,
+   // withAuthRedirect,
     connect(mapStateToProps, {
         followThunk, unfollowThunk, setCurrentPage,  toggleFollowingProgress, getUsersThunk
     })

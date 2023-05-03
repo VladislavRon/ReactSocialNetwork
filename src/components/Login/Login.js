@@ -43,6 +43,11 @@ const LoginPage = (props) => {
 
                     let {setStatus, setFieldValue, setSubmitting} = bagWithMethods;
 
+                    //console.log( status );
+                    //console.log( values.general );
+                    console.log( props.isSubmitting );
+                    //console.log( props.isSubmitting );
+
                     props.login(
                         values.email,
                         values.password,

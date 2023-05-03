@@ -10,6 +10,10 @@ import ProfileContainer from "./components/MainContent/MyPosts/ProfileContainer"
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import DialogsContainer from "./components/MainContent/Dialogs/DialogsContainer";
+import {connect} from "react-redux";
+import {initializeApp} from "./redux/app_reducer";
+import Preloader from "./components/common/Preloader/Preloader";
+
 
 
 
@@ -18,42 +22,97 @@ import DialogsContainer from "./components/MainContent/Dialogs/DialogsContainer"
 // <div className={`${classes.item} ${classes.active}`}>
 
 
-const App = ({store}) => {
+class App extends React.Component {
 
-    return (
-        <div className='appWrapper'>
-            <HeaderContainer />
-            <Nav store={store} />
-            <div className="MainContent">
-                <Routes>
-                    <Route
-                        path="/profile/*"
-                        element={<ProfileContainer />}
-                    />
-                    <Route
-                        path="/dialogs/*"
-                        //store={store} попадает в компоненту как стейты
-                        element={<DialogsContainer store={store} />}
-                    />
-                    <Route path="/news" element={<News />}/>
-                    <Route path="/music" element={<Music />}/>
-                    <Route path="/settings" element={<Settings />}/>
-                    <Route
-                        path="/login"
-                        element={ <Login />}
-                    />
-                    <Route
-                        path="/friends"
-                        element={<FriendsContainer  />}
-                    />
-                </Routes>
+    componentDidMount() {
+        this.props.initializeApp();
+    }
+
+    render() {
+        let {store} = this.props;
+
+        if(!this.props.initialized){
+             return <Preloader />
+        }
+        return (
+            <div className='appWrapper'>
+                <HeaderContainer/>
+                <Nav store={store}/>
+                <div className="MainContent">
+                    <Routes>
+                        <Route
+                            path="/profile/*"
+                            element={<ProfileContainer/>}
+                        />
+                        <Route
+                            path="/dialogs/*"
+                            //store={store} попадает в компоненту как стейты
+                            element={<DialogsContainer store={store}/>}
+                        />
+                        <Route path="/news" element={<News/>}/>
+                        <Route path="/music" element={<Music/>}/>
+                        <Route path="/settings" element={<Settings/>}/>
+                        <Route
+                            path="/login"
+                            element={<Login/>}
+                        />
+                        <Route
+                            path="/friends"
+                            element={<FriendsContainer/>}
+                        />
+                    </Routes>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
+//когда мы конеектим компоненту - сбивается роутинг (лично у меня все ок, мож пофиксили)
+// поэтому  компоус и визроутер не делал
+
+let mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+
+})
+
+// export default connect(mapStateToProps, {getAuthUserData}) (App);
+export default connect(mapStateToProps, {initializeApp}) (App);
+
+// const App = ({store}) => {
+//
+//     return (
+//         <div className='appWrapper'>
+//             <HeaderContainer />
+//             <Nav store={store} />
+//             <div className="MainContent">
+//                 <Routes>
+//                     <Route
+//                         path="/profile/*"
+//                         element={<ProfileContainer />}
+//                     />
+//                     <Route
+//                         path="/dialogs/*"
+//                         //store={store} попадает в компоненту как стейты
+//                         element={<DialogsContainer store={store} />}
+//                     />
+//                     <Route path="/news" element={<News />}/>
+//                     <Route path="/music" element={<Music />}/>
+//                     <Route path="/settings" element={<Settings />}/>
+//                     <Route
+//                         path="/login"
+//                         element={ <Login />}
+//                     />
+//                     <Route
+//                         path="/friends"
+//                         element={<FriendsContainer  />}
+//                     />
+//                 </Routes>
+//             </div>
+//         </div>
+//     );
+// }
 
 
 
-export default App;
+// export default App;
 
 
