@@ -20,7 +20,7 @@ class ProfileContainer extends React.Component{
     componentDidMount() {
 
         let userId = this.props.router.params['*'];
-        debugger;
+
         // userId = 28856;
         if (!userId) {
 
@@ -47,6 +47,8 @@ class ProfileContainer extends React.Component{
     }
 
     render(){
+        //console.log('render profile')
+
         // if (this.props.isAuth === false) {
         //     return <Navigate to={'/login'} />
         // }
@@ -81,13 +83,15 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+    //console.log('mapStateToProps profile')
+    return{
     profile: state.profilePage.profile,
     //3.state.profilePage.status -> profile_reducer,
     status: state.profilePage.status,
     authorisedUserId: state.auth.id,
     isAuth: state.auth.isAuth
-})
+}}
 
 //with compose 70lesson
 //порядок походу не важен хз, хотя Димыч говорит снизу вверх...

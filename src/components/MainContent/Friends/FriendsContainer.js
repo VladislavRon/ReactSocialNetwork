@@ -13,7 +13,7 @@ import {compose} from "redux";
 import {
     getCurrentPage,
     getFollowingInProgress,
-    getFriends,
+    getFriendsSelector,
     getIsFetching,
     getPageSize,
     getUsersCount
@@ -80,8 +80,9 @@ class FriendsContainer extends React.Component{
 
 //Билиотека reselect - селекторы с одной стороны помогают, но заставляют чаще перерисовывать
 const mapStateToProps = (state) => {
+
     return{
-        friends: getFriends(state),
+        friends: getFriendsSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getUsersCount(state),
         currentPage: getCurrentPage(state),
@@ -90,9 +91,6 @@ const mapStateToProps = (state) => {
         //isAuth: state.auth.isAuth
     }
 }
-
-
-
 
 
 //with сompose 70 lesson
