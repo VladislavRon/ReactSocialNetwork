@@ -1,17 +1,23 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followSuccess, followThunk, getUsersThunk, setCurrentPage, setFriends,
-    setTotalUsersCount, toggleFollowingProgress, toggleIsFetching, unfollowSuccess, unfollowThunk
-}
-    from "../../../redux/friends_reducer";
-import axios from "axios";
+    followThunk,
+    getUsersThunk,
+    setCurrentPage,
+    toggleFollowingProgress,
+    unfollowThunk
+} from "../../../redux/friends_reducer";
 import Friends from "./Friends";
 import Preloader from "../../common/Preloader/Preloader";
-import {usersAPI} from "../../../api/friends_api";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getFriends,
+    getIsFetching,
+    getPageSize,
+    getUsersCount
+} from "../../../redux/friends-selectors";
 
 
 class FriendsContainer extends React.Component{
@@ -72,16 +78,16 @@ class FriendsContainer extends React.Component{
     }
 }
 
-
+//Билиотека reselect - селекторы с одной стороны помогают, но заставляют чаще перерисовывать
 const mapStateToProps = (state) => {
     return{
-        friends: state.friendsPage.friends,
-        pageSize: state.friendsPage.pageSize,
-        totalUsersCount: state.friendsPage.totalUsersCount,
-        currentPage: state.friendsPage.currentPage,
-        isFetching: state.friendsPage.isFetching,
-        followingInProgress: state.friendsPage.followingInProgress,
-        isAuth: state.auth.isAuth
+        friends: getFriends(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
+        //isAuth: state.auth.isAuth
     }
 }
 

@@ -87,11 +87,12 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_COUNT, 
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 export const toggleFollowingProgress = (isFetching, friendID) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, friendID})
 
-export const getUsersThunk = (currentPage, pageSize)=>{
+export const getUsersThunk = (page, pageSize)=>{
     return (dispatch)=>{
         dispatch(toggleIsFetching(true));
+        //dispatch(setCurrentPage(page)) где то у меня есть изменение карент падж в коде(становится жирной цифра), у него не было и он сделал сдесь
 
-        usersAPI.getUsers(currentPage, pageSize).then(data =>{
+        usersAPI.getUsers(page, pageSize).then(data =>{
             dispatch(toggleIsFetching(false));
             dispatch(setFriends(data.items));
             dispatch(setTotalUsersCount(Math.ceil(data.totalCount/150)));

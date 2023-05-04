@@ -10,12 +10,12 @@ import {Navigate} from "react-router-dom";
 
 
 class ProfileContainer extends React.Component{
-    constructor(props) {
-        super( props );
-        this.state = {
-            isShowMyProfile: true
-        }
-    }
+    // constructor(props) {
+    //     super( props );
+    //     this.state = {
+    //         isShowMyProfile: true
+    //     }
+    // }
 
     componentDidMount() {
 
@@ -108,4 +108,4 @@ export default compose(
 
 // export default connect( mapStateToProps, { setFriendProfile, getProfileThunk} )( withRouter( ProfileContainer ) );
 
-// export default connect(mapStateToProps, {setFriendProfile})(ProfileContainer);
+// export default connect(mapStateToProps, {setFriendProfile})(ProfileContainer);export default connect(mapStateToProps, {setFriendProfile})(ProfileContainer);export default connect(mapStateToProps, {setFriendProfile})(ProfileContainer);
