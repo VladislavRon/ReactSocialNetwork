@@ -15,7 +15,7 @@ let initialState = {
     ],
     //newPostText: '',
     profile: null,
-    status: "...text..."
+    status: null
 }
 
 const profile_reducer = (state = initialState, action) => {
@@ -98,7 +98,8 @@ export const updateStatus = (status) => {
 
 
 
-export const updateNewPostTextActionCreator = (text) => ({  type: UPDATE_NEW_POST_TEXT, newText: text })
+//export const updateNewPostTextActionCreator = (text) => ({  type: UPDATE_NEW_POST_TEXT, newText: text })
+
 //6. actionCreator -> Sunk getStatus , updateStatus -> 7закидываем санки в profileContainer
 
 

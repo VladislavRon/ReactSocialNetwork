@@ -3,6 +3,7 @@ import React from "react";
 import Preloader from "../../../common/Preloader/Preloader";
 import {nanoid} from "nanoid";
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 
@@ -29,8 +30,8 @@ function ProfileInfo(props){
 
                     {/*компонента статуса*/}
                     {/*10.прокидываем status в ProfileStatus*/}
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
-
+                    {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
+                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                     <ul>{lis}</ul>
                 </div>
             </div>
