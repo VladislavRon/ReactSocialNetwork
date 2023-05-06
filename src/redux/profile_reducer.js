@@ -5,7 +5,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_FRIEND_PROFILE = 'SET_FRIEND_PROFILE';
 //4. initialState status: "",    SET_STATUS = "SET_STATUS" -> down
 const SET_STATUS = "SET_STATUS";
-
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
     postData : [
@@ -52,6 +52,11 @@ const profile_reducer = (state = initialState, action) => {
                 status: action.status
             }
         }
+        case DELETE_POST:
+            return {
+                ...state,
+                postData: state.postData.filter( p => p.id !== action.postId )
+            }
 
         default:
             return state;
@@ -59,7 +64,7 @@ const profile_reducer = (state = initialState, action) => {
 
 
 }
-
+export const deletePost = (postId) => ({type: DELETE_POST, postId})
 export const addPostActionCreator = (newPostText) =>  ({type: ADD_POST, newPostText})
 const setFriendProfile = (profile) =>  ({  type: SET_FRIEND_PROFILE, profile: profile })
 

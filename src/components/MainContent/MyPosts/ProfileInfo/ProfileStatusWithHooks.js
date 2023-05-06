@@ -53,6 +53,6 @@ const ProfileStatusWithHooks = (props) => {
         </div>
     )
 }
-console.log('1')
+
 
 export default ProfileStatusWithHooks

@@ -47,6 +47,7 @@ class ProfileContainer extends React.Component{
     }
 
     render(){
+
         //console.log('render profile')
 
         // if (this.props.isAuth === false) {
