@@ -1,5 +1,6 @@
 import {nanoid} from "nanoid";
 import {usersAPI} from "../api/friends_api";
+import {updateObjInArr} from "../utils/object-helper.js";
 
 // {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
 // {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', avatar: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},
@@ -24,17 +25,25 @@ let initialState = {
 }
 
 const friends_reducer = (state = initialState, action) => {
+    // case FOLLOW:{
+    //     return  {
+    //         ...state,
+    //         //friends: [...state.friends]
+    //         friends: state.friends.map(friend => {
+    //             if (friend.id === action.friendID){
+    //                 return {...friend, followed: true}
+    //             }
+    //             return friend;
+    //         })
+    //     };
+    //
+    // }
     switch (action.type) {
         case FOLLOW:{
             return  {
                 ...state,
                 //friends: [...state.friends]
-                friends: state.friends.map(friend => {
-                    if (friend.id === action.friendID){
-                        return {...friend, followed: true}
-                    }
-                    return friend;
-                })
+                friends: updateObjInArr(state.friends, action.friendID, 'id', {followed: true})
             };
 
         }
@@ -45,12 +54,24 @@ const friends_reducer = (state = initialState, action) => {
                 //friends: [...state.friends]
                 friends: state.friends.map(friend => {
                     if (friend.id === action.friendID){
-                        return {...friend, followed: false}
+                        return {...friend, followed: !friend.followed}
                     }
                     return friend;
                 })
             };
         }
+        // case UNFOLLOW:{
+        //     return  {
+        //         ...state,
+        //         //friends: [...state.friends]
+        //         friends: state.friends.map(friend => {
+        //             if (friend.id === action.friendID){
+        //                 return {...friend, followed: false}
+        //             }
+        //             return friend;
+        //         })
+        //     };
+        // }
 
         case SET_FRIENDS:{
             return {...state, friends: action.friends}
@@ -87,49 +108,35 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_COUNT, 
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 export const toggleFollowingProgress = (isFetching, friendID) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, friendID})
 
-export const getUsersThunk = (page, pageSize)=>{
-    return (dispatch)=>{
-        dispatch(toggleIsFetching(true));
-        //dispatch(setCurrentPage(page)) где то у меня есть изменение карент падж в коде(становится жирной цифра), у него не было и он сделал сдесь
-
-        usersAPI.getUsers(page, pageSize).then(data =>{
-            dispatch(toggleIsFetching(false));
-            dispatch(setFriends(data.items));
-            dispatch(setTotalUsersCount(Math.ceil(data.totalCount/150)));
-        })
-    }
+export const getUsersThunk = (page, pageSize) => async (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    let data = await usersAPI.getUsers(page, pageSize);
+    dispatch(toggleIsFetching(false));
+    dispatch(setFriends(data.items));
+    dispatch(setTotalUsersCount(Math.ceil(data.totalCount / 150)));
 }
 
-export const followThunk = (id)=>{
-    return (dispatch)=>{
-        dispatch(toggleFollowingProgress(true, id));
+ const followUnfollowFlow = async (dispatch, id, apiMethod,actionCreator) => {
+     dispatch(toggleFollowingProgress(true, id));
+     let response = await apiMethod(id)
+     if (response.data.resultCode === 0) {
+         dispatch(actionCreator(id));
+     }
+     dispatch(toggleFollowingProgress(false, id));
+ }
 
-        usersAPI.follow(id)
-            .then(response => {
-                if(response.data.resultCode === 0){
-                    dispatch(followSuccess(id));
-                }
-            dispatch(toggleFollowingProgress(false, id));
-        })
-    }
+export const followThunk = (id) => async (dispatch) => {
+    let apiMethod = usersAPI.follow.bind(usersAPI);
+    await followUnfollowFlow(dispatch, id, apiMethod, followSuccess)
 }
 
-export const unfollowThunk = (id)=>{
-    return (dispatch)=>{
-        dispatch(toggleFollowingProgress(true, id));
-
-        usersAPI.unfollow(id)
-            .then(response => {
-                if(response.data.resultCode === 0){
-                    dispatch(unfollowSuccess(id));
-                }
-                dispatch(toggleFollowingProgress(false, id));
-        })
-    }
+export const unfollowThunk = (id) => async (dispatch) => {
+    let apiMethod = usersAPI.unfollow.bind(usersAPI);
+    await followUnfollowFlow(dispatch, id, apiMethod, unfollowSuccess)
 }
 
 
-
+export default friends_reducer;
 
 
 // export const getUsers = (currentPage, pageSize) => {  // Thunk Creator
@@ -156,4 +163,46 @@ export const unfollowThunk = (id)=>{
 // export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 
 
-export default friends_reducer;
+
+
+
+// export const getUsersThunk = (page, pageSize)=>{
+//     return (dispatch)=>{
+//         dispatch(toggleIsFetching(true));
+//         //dispatch(setCurrentPage(page)) где то у меня есть изменение карент падж в коде(становится жирной цифра), у него не было и он сделал сдесь
+//
+//         usersAPI.getUsers(page, pageSize).then(data =>{
+//             dispatch(toggleIsFetching(false));
+//             dispatch(setFriends(data.items));
+//             dispatch(setTotalUsersCount(Math.ceil(data.totalCount/150)));
+//         })
+//     }
+// }
+
+// export const followThunk = (id)=>{
+//     return (dispatch)=>{
+//         dispatch(toggleFollowingProgress(true, id));
+//
+//         usersAPI.follow(id)
+//             .then(response => {
+//                 if(response.data.resultCode === 0){
+//                     dispatch(followSuccess(id));
+//                 }
+//                 dispatch(toggleFollowingProgress(false, id));
+//             })
+//     }
+// }
+//
+// export const unfollowThunk = (id)=>{
+//     return (dispatch)=>{
+//         dispatch(toggleFollowingProgress(true, id));
+//
+//         usersAPI.unfollow(id)
+//             .then(response => {
+//                 if(response.data.resultCode === 0){
+//                     dispatch(unfollowSuccess(id));
+//                 }
+//                 dispatch(toggleFollowingProgress(false, id));
+//             })
+//     }
+// }

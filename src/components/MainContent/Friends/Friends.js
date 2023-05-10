@@ -12,7 +12,6 @@ const Friends = (props) => {
         pages.push(i);
     }
     const friendsRender =  props.friends.map(friend =>
-
         <Friend
             key={nanoid()}
             id={friend.id}

@@ -1,7 +1,7 @@
 import {profileAPI} from "../api/profile_api";
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+//const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_FRIEND_PROFILE = 'SET_FRIEND_PROFILE';
 //4. initialState status: "",    SET_STATUS = "SET_STATUS" -> down
 const SET_STATUS = "SET_STATUS";
@@ -69,35 +69,23 @@ export const addPostActionCreator = (newPostText) =>  ({type: ADD_POST, newPostT
 const setFriendProfile = (profile) =>  ({  type: SET_FRIEND_PROFILE, profile: profile })
 
 
-export const getProfileThunk = (userId) => {
-    return (dispatch) => {
-        profileAPI
-            .getProfile(userId)
-            .then(data => {
-                dispatch(setFriendProfile(data));
-            });
-    }
+export const getProfileThunk = (userId) =>   async (dispatch) => {
+    let response = await profileAPI.getProfile(userId);
+    dispatch(setFriendProfile(response.data));
 }
 
-export const getUserProfile = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setStatus(response.data));
-            });
-    }
+export const getUserProfile = (userId) => async (dispatch) => {
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response.data));
 }
 
 const setStatus = (status) =>  ({  type: SET_STATUS, status})
 
-export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if(response.data.resultCode === 0){
-                    dispatch(setStatus(status));
-                }
-            });
+export const updateStatus = (status) => async (dispatch) => {
+    let response = await profileAPI.updateStatus(status);
+
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
     }
 }
 
@@ -109,3 +97,35 @@ export const updateStatus = (status) => {
 
 
 export default profile_reducer;
+
+// export const getProfileThunk = (userId) => {
+//     return (dispatch) => {
+//         profileAPI
+//             .getProfile(userId)
+//             .then(data => {
+//                 dispatch(setFriendProfile(data));
+//             });
+//     }
+// }
+//
+// export const getUserProfile = (userId) => {
+//     return (dispatch) => {
+//         profileAPI.getStatus(userId)
+//             .then(response => {
+//                 dispatch(setStatus(response.data));
+//             });
+//     }
+// }
+//
+// const setStatus = (status) =>  ({  type: SET_STATUS, status})
+//
+// export const updateStatus = (status) => {
+//     return (dispatch) => {
+//         profileAPI.updateStatus(status)
+//             .then(response => {
+//                 if(response.data.resultCode === 0){
+//                     dispatch(setStatus(status));
+//                 }
+//             });
+//     }
+// }

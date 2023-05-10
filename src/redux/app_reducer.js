@@ -31,6 +31,9 @@ export const initializedSuccess = () =>({
 //     dispatch(initializedSuccess());
 // }
 
+
+//если мы ретурним что то из санки с промисами, то в том месте
+// где мы задиспатчили эту санку мы ретурним сам диспатч, промис туда
 export const initializeApp = () =>  (dispatch) => {
      let promise = dispatch(getAuthUserData());
      Promise.all([promise])

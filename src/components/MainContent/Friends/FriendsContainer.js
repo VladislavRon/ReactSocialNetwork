@@ -23,7 +23,9 @@ import {
 class FriendsContainer extends React.Component{
 
     componentDidMount() {
-        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
+        let {currentPage, pageSize} = this.props;
+        this.props.getUsersThunk(currentPage, pageSize);
+
         // this.props.toggleIsFetching(true);
         // let currentPage = this.props.currentPage;
         // let pageSize = this.props.pageSize;
@@ -35,14 +37,17 @@ class FriendsContainer extends React.Component{
     }
 
     onPageChanged = ( pageNumber) => {
+        let {setCurrentPage, getUsersThunk, pageSize} = this.props;
+        setCurrentPage(pageNumber);
+        getUsersThunk(pageNumber, pageSize);
+
         // this.props.toggleIsFetching(true);
         // this.props.setCurrentPage(pageNumber);
         // usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
         //     this.props.toggleIsFetching(false);
         //     this.props.setFriends(data.items);
         // });
-        this.props.setCurrentPage(pageNumber);
-        this.props.getUsersThunk(pageNumber, this.props.pageSize);
+
     }
 
 

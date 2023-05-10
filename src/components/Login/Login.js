@@ -45,7 +45,6 @@ const LoginPage = (props) => {
 
                     //console.log( status );
                     //console.log( values.general );
-                    console.log( props.isSubmitting );
                     //console.log( props.isSubmitting );
 
                     props.login(
@@ -64,7 +63,7 @@ const LoginPage = (props) => {
 
                     //console.log( status );
                     //console.log( values.general );
-                    console.log( props.isSubmitting );
+                    //console.log( props.isSubmitting );
 
                     return (
                         <Form>
