@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, legacy_createStore as createStore} from "redux";
 import profile_reducer from "./profile_reducer";
 import dialogs_reducer from "./dialogs_reducer";
 import sidebar_reducer from "./sidebar_reducer";
@@ -24,10 +24,16 @@ let reducers = combineReducers({
 
 
 //добавляем мидлваре(специализированый промежуточный уровень) для обработки санок, ее надо инстал npm i redux-thunk
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+//let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+
+
+//redux-devtools
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers,  composeEnhancers( applyMiddleware(thunkMiddleware)));
 
 //добавляем стор в обьект window, что бы из консоли можно было легко его просмотреть с пом запроса в консоли store.getState()
-window.store = store;
+window.__store__ = store;
 
 
 export default store;

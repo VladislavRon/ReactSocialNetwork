@@ -1,16 +1,11 @@
 import React from 'react';
 import Friend from "./Friend/Friend";
-import classes from "./Friends.module.css";
 import {nanoid} from "nanoid";
+import Paginator from "../../common/Paginator/Paginator.js";
 
 
 const Friends = (props) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for(let i=1; i<= pagesCount; i++){
-        pages.push(i);
-    }
     const friendsRender =  props.friends.map(friend =>
         <Friend
             key={nanoid()}
@@ -31,25 +26,26 @@ const Friends = (props) => {
     return (
         <>
             <div>
-                {pages.map(page => {
-                    return <span
-                        key={nanoid()}
-                        onClick={(e) => {
-                            props.onPageChanged(page);
-                        }}
-                        className={(props.currentPage === page) ? classes.selectedPage : classes.unselectedPage}
-                    > {page} </span>
-                })}
-            </div>
-            <div>
                 {friendsRender}
             </div>
+            <Paginator
+                totalItemsCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+                onPageChanged={props.onPageChanged}
+                currentPage={props.currentPage}
+                // portionSize={}
+            />
         </>
     );
 
 }
 
+
+
 export default Friends;
+
+
+
 
 // {id: nanoid(), fullName: 'Dmitri K', location: {country:'Germany', city:'Berlin'}, followed: true,  status: 'online', photoUrl: 'https://gambolthemes.net/workwise-new/images/resources/s2.png'},
 // {id: nanoid() ,fullName: 'Olga J', location: {country:'France', city:'Paris'}, followed: false,  status: 'offline', photoUrl: 'https://gambolthemes.net/workwise-new/images/resources/s1.png'},

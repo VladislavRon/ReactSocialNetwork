@@ -113,7 +113,7 @@ export const getUsersThunk = (page, pageSize) => async (dispatch) => {
     let data = await usersAPI.getUsers(page, pageSize);
     dispatch(toggleIsFetching(false));
     dispatch(setFriends(data.items));
-    dispatch(setTotalUsersCount(Math.ceil(data.totalCount / 150)));
+    dispatch(setTotalUsersCount(Math.ceil(data.totalCount)));
 }
 
  const followUnfollowFlow = async (dispatch, id, apiMethod,actionCreator) => {

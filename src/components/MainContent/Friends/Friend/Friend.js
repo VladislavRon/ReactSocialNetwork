@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 
 
-function Friend({id,fullName,location,followed,status,photoUrl,followThunk, unfollowThunk,followingInProgress}){
+function Friend({id,fullName,followed,status,photoUrl,followThunk, unfollowThunk,followingInProgress}){
 
     return (
         <>
@@ -12,7 +12,6 @@ function Friend({id,fullName,location,followed,status,photoUrl,followThunk, unfo
                 </NavLink>
             </div>
             <div>{fullName}</div>
-            <div>{location}</div>
             <div>{status}</div>
             <div>
                 { followed ?
