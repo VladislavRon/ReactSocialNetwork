@@ -13,7 +13,10 @@ const Paginator = ({totalItemsCount,pageSize,onPageChanged,currentPage,portionSi
 
     let portionCount = Math.ceil(pagesCount / portionSize);
     let [portionNumber, setPortionNumber] = useState(1);
+
+    //сохраняет выбранную пятерку/десятку страниц при переключении вкладок, без юзеффекта при переключении всегда появлялась первая десятка/пятерка
     useEffect(()=>setPortionNumber(Math.ceil(currentPage/portionSize)), [currentPage]);
+
     //получение первого, 11, 21 и тд элемента
     let leftPortionNumber = (portionNumber-1) * portionSize +1;
     //получение  10,  20 и тд элемента
