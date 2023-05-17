@@ -16,15 +16,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
     root.render(
         <React.StrictMode>
-            {/*<HashRouter basename ="/">*/}
-            <BrowserRouter basename ="/">
-
+            <HashRouter>
+            {/*<BrowserRouter basename ="/">*/}
                     <Provider store={store}>
                         <App store={store}/>
                     </Provider>
-
-            </BrowserRouter>
-            {/*</HashRouter>*/}
+            {/*</BrowserRouter>*/}
+            </HashRouter>
         </React.StrictMode>
     );
 
